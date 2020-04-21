@@ -35,7 +35,7 @@ public class MainMenuState : MonoBehaviour {
             currentState = MenuState.menu;
         }
 
-        SyncState();
+        SyncUIState();
     }
 
     /**
@@ -48,7 +48,7 @@ public class MainMenuState : MonoBehaviour {
     /**
      * This method syncs the UI with the currentState variable.
      */
-    private void SyncState() {
+    private void SyncUIState() {
         HideAllPanels();
 
         switch (currentState) {

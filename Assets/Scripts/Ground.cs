@@ -13,11 +13,14 @@ public class Ground : MonoBehaviour {
     // world pos of the top left-most point, default to (0,0)
     public float topLeftMostX;
     public float topLeftMostZ;
+    public float arialCameraHeight;
+
+    public Camera arialViewCamera;
 
     void Start () {
         AssertCorrectConfiguration();
         InitializeVariables();
-        PositionMainCameraForArialView();
+        PositionCameraForArialView();
 
         currentGrid.GeneratePath(GameState.Difficulty.easy);
         DrawTiles();
@@ -45,14 +48,13 @@ public class Ground : MonoBehaviour {
     }
 
     /**
-     * Position the main camera to give us an arial view.
+     * Position the arial view camera to give us a good view.
      */
-    private void PositionMainCameraForArialView() {
-        Camera camera = Camera.main;
+    private void PositionCameraForArialView() {
+        Camera camera = arialViewCamera;
         float fieldWidth = tileWidth * currentGrid.Width;
         float fieldLength = tileLength * currentGrid.Length;
-        // TODO: Maybe height can be adjusted according to how wide the field is
-        camera.transform.position = new Vector3(fieldWidth / 2.0f, 100.0f, fieldLength / 2.0f);
+        camera.transform.position = new Vector3(fieldWidth / 2.0f, arialCameraHeight, fieldLength / 2.0f);
         camera.transform.eulerAngles = new Vector3(90.0f, 0.0f, 0.0f);
     }
 

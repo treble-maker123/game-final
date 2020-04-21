@@ -166,7 +166,7 @@ public class Grid {
 
             if (dir == Direction.down) {
                 // if current row is one above the end point, go down one more
-                if (pos.Y + 2 == endPos.Y) {
+                if (pos.Y + 1 == endPos.Y) {
                     dir = Direction.down;
                     continue;
                 }
