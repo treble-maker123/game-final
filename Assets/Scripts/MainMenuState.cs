@@ -17,12 +17,12 @@ public class MainMenuState : MonoBehaviour {
     private MenuState currentState;
     private List<GameObject> allPanels;
 
+    // variables to be configured in unity
     public GameObject buttonPanel;
     public GameObject instructionPanel;
     public GameObject scoreboardPanel;
     public GameObject creditsPanel;
-
-    // key to go back to the menu state after entering one of the other states
+    // key to go back to the menu state
     public KeyCode backKey;
 
     void Start () {
@@ -37,6 +37,13 @@ public class MainMenuState : MonoBehaviour {
 
         SyncState();
     }
+
+    /**
+     * This method loops through allPanels and set each one to inactive.
+     */
+     private void HideAllPanels() {
+        allPanels.ForEach(p => p.SetActive(false));
+     }
 
     /**
      * This method syncs the UI with the currentState variable.
@@ -63,12 +70,9 @@ public class MainMenuState : MonoBehaviour {
         }
     }
 
-    /**
-     * This method loops through allPanels and set each one to inactive.
-     */
-    private void HideAllPanels() {
-        allPanels.ForEach(p => p.SetActive(false));
-    }
+    // =========================================================
+    // Button events
+    // =========================================================
 
     /**
      * Called when the "Play" button is clicked.
