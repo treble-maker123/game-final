@@ -53,7 +53,7 @@ public class Ground : MonoBehaviour {
         float fieldLength = tileLength * currentGrid.Length;
         // TODO: Maybe height can be adjusted according to how wide the field is
         camera.transform.position = new Vector3(fieldWidth / 2.0f, 100.0f, fieldLength / 2.0f);
-        camera.transform.eulerAngles = new Vector3(90.0f, -90.0f, 0.0f);
+        camera.transform.eulerAngles = new Vector3(90.0f, 0.0f, 0.0f);
     }
 
     /**
@@ -66,6 +66,7 @@ public class Ground : MonoBehaviour {
         for (int x = 0; x < grid.Width; x++) { // along x-axis in the world
             for (int z = 0; z < grid.Length; z++) { // along z-axis in the world
                 Vector3 worldPosition = new Vector3(x*tileWidth, 0, z*tileLength);
+                // Vector3 worldPosition = new Vector3(z*tileLength, 0, x*tileWidth);
                 GameObject tile;
 
                 switch(grid.At(x,z)) {

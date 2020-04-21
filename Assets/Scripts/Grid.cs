@@ -92,7 +92,7 @@ public class Grid {
                 case (GameState.Difficulty.easy):
                     if (dir == Direction.right || dir == Direction.left)
                         tilesToExpand = UnityEngine.Random.Range(
-                                Math.Min(1, (int) (availableTiles * 0.8f)),
+                                Math.Min(1, (int) (availableTiles * 0.9f)),
                                 availableTiles + 1); // +1 because Random.Range is exclusive for end
                     else
                         tilesToExpand = 2; // go down two at a time to ensure maximum length
@@ -100,7 +100,7 @@ public class Grid {
                 case (GameState.Difficulty.medium):
                     if (dir == Direction.right || dir == Direction.left)
                         tilesToExpand = UnityEngine.Random.Range(
-                                Math.Min(1, (int) (availableTiles * 0.5f)),
+                                Math.Min(1, (int) (availableTiles * 0.4f)),
                                 Math.Min(1, (int) (availableTiles * 0.8f)) + 1);
                     else
                         tilesToExpand = UnityEngine.Random.Range(2, 4);
@@ -108,8 +108,8 @@ public class Grid {
                 case (GameState.Difficulty.hard):
                     if (dir == Direction.right || dir == Direction.left)
                         tilesToExpand = UnityEngine.Random.Range(
-                                Math.Min(1, (int) (availableTiles * 0.5f)),
-                                Math.Min(1, (int) (availableTiles * 0.3f)) + 1);
+                                Math.Min(1, (int) (availableTiles * 0.4f)),
+                                Math.Min(1, (int) (availableTiles * 0.2f)) + 1);
                     else
                         tilesToExpand = 3;
                     break;
@@ -122,10 +122,11 @@ public class Grid {
             // move the waypoint to the destination
             waypoint.Move(tilesToExpand, dir);
             // double check that all assumptions are valid
-            Debug.Log("# tiles to expand: " + tilesToExpand + ", destination: " + waypoint.ToString() + ", direction: " + dir.ToString());
+            // Debug.Log("# tiles to expand: " + tilesToExpand + ", destination: " + waypoint.ToString() + ", direction: " + dir.ToString());
             Debug.Assert(!waypoint.IsOnBorder(this));
             Debug.Assert(!waypoint.OutOfBound(this));
-            Debug.Assert(state[waypoint.X, waypoint.Y] == TileType.terrain);
+            Debug.Assert(
+                    state[waypoint.X, waypoint.Y] == TileType.terrain || state[waypoint.X, waypoint.Y] == TileType.end);
             Debug.Assert(waypoint.X <= endPos.X);
             Debug.Assert(waypoint.Y <= endPos.Y);
 
@@ -142,6 +143,9 @@ public class Grid {
             // update the state to build the path
             while (true) {
                 pos.Move(1, dir);
+
+                if (pos == endPos) break;
+
                 state[pos.X, pos.Y] = TileType.path;
 
                 if (pos == waypoint) break;
@@ -161,6 +165,12 @@ public class Grid {
             }
 
             if (dir == Direction.down) {
+                // if current row is one above the end point, go down one more
+                if (pos.Y + 2 == endPos.Y) {
+                    dir = Direction.down;
+                    continue;
+                }
+
                 int leftRoom = pos.AvailableUnitsUntilBorder(this, Direction.left);
                 int rightRoom = pos.AvailableUnitsUntilBorder(this, Direction.right);
                 dir = leftRoom > rightRoom ? Direction.left : Direction.right;
