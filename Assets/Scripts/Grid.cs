@@ -12,6 +12,12 @@ public class Grid {
         end
     }
 
+    public enum Difficulty {
+        easy,
+        medium,
+        hard
+    }
+
     private int width;
     private int length;
     private TileType[,] state;
@@ -50,8 +56,8 @@ public class Grid {
     }
 
     /**
-     * Update the grid with the new dimension. Note that updating the
-     * dimension will reset all internal states;
+     * Update the grid with the new dimension. Note that calling this method
+     * will reset all internal states;
      */
     public void UpdateDimension(int width, int length) {
         this.width = width;
@@ -72,5 +78,13 @@ public class Grid {
         // start and end points will be fixed
         state[1,1] = TileType.start;
         state[width-2,length-2] = TileType.end;
+    }
+
+    /**
+     * Resets the grid and create a new path. The higher the
+     * difficulty, the longer the generated path will be.
+     */
+    public void GeneratePath(Difficulty d) {
+        UpdateDimension(Width, Length);
     }
 }

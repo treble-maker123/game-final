@@ -19,7 +19,7 @@ public class Ground : MonoBehaviour {
         InitializeVariables();
         PositionMainCameraForArialView();
 
-        DrawMaze(currentGrid);
+        DrawTiles(currentGrid);
     }
 
     void Update () {
@@ -58,46 +58,54 @@ public class Ground : MonoBehaviour {
     /**
      * Takes a Grid object and draws all the tiles.
      */
-    public void DrawMaze(Grid grid) {
-        Vector3 floorTileScale = new Vector3(tileWidth, tileHeight, tileLength);
+    public void DrawTiles(Grid grid) {
+        Vector3 tileScale = new Vector3(tileWidth, tileHeight, tileLength);
 
-        for (int x = 0; x < grid.Width; x++) {
-            for (int z = 0; z < grid.Length; z++) {
-                Vector3 worldPosition = new Vector3(x*tileWidth, 0, z*tileWidth);
+        for (int x = 0; x < grid.Width; x++) { // along x-axis in the world
+            for (int z = 0; z < grid.Length; z++) { // along z-axis in the world
+                Vector3 worldPosition = new Vector3(x*tileWidth, 0, z*tileLength);
+                GameObject tile;
 
                 switch(grid.At(x,z)) {
                     case Grid.TileType.terrain:
-                        GameObject terrain = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                        terrain.name = "Terrain-(" + x + "," + z + ")";
-                        terrain.transform.parent = transform; // setting this as child of ground
-                        terrain.transform.localScale = floorTileScale;
-                        terrain.transform.position = worldPosition;
-                        terrain.GetComponent<Renderer>().material.color = new Color(0.0f, 0.0f, 0.5f);
+                        tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                        tile.name = "Terrain-" + x + "," + z;
+                        tile.GetComponent<Renderer>().material.color = new Color(0.0f, 0.0f, 0.2f);
                         break;
                     case Grid.TileType.path:
+                        tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                        tile.name = "Path-" + x + "," + z;
+                        tile.GetComponent<Renderer>().material.color = new Color(0.1f, 0.1f, 0.1f);
                         break;
                     case Grid.TileType.start:
-                        GameObject start = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                        start.name = "Terrain-(" + x + "," + z + ")";
-                        start.transform.parent = transform;
-                        start.transform.localScale = floorTileScale;
-                        start.transform.position = worldPosition;
-                        start.GetComponent<Renderer>().material.color = new Color(0.0f, 0.5f, 0.0f);
+                        tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                        tile.name = "Start-" + x + "," + z;
+                        tile.GetComponent<Renderer>().material.color = new Color(0.0f, 0.5f, 0.0f);
                         break;
                     case Grid.TileType.end:
+                        tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                        tile.name = "End-" + x + "," + z;
+                        tile.GetComponent<Renderer>().material.color = new Color(0.5f, 0.0f, 0.0f);
                         break;
                     case Grid.TileType.border:
-                        GameObject border = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                        border.name = "Border-(" + x + "," + z + ")";
-                        border.transform.parent = transform;
-                        border.transform.localScale = floorTileScale;
-                        border.transform.position = worldPosition;
-                        border.GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 0.5f);
+                        tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                        tile.name = "Border-" + x + "," + z;
+                        tile.GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 0.5f);
                         break;
                     default:
                         Debug.LogError("Unrecognized tile type: " + grid.At(x,z).ToString());
-                        break;
+                        return;
                 }
+
+                 // setting this as child of ground object
+                tile.transform.parent = transform;
+                // update object position in world space
+                tile.transform.localScale = tileScale;
+                tile.transform.position = worldPosition;
+                // add Tile component and update its internal state
+                tile.AddComponent<Tile>();
+                tile.GetComponent<Tile>().GridLocX = x;
+                tile.GetComponent<Tile>().GridLocY = z;
             }
         }
     }
