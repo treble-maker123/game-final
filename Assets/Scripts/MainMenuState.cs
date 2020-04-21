@@ -1,0 +1,106 @@
+﻿using UnityEngine;
+using System.Collections.Generic;
+
+public class MainMenuState : MonoBehaviour {
+
+    private enum MenuState {
+        menu,
+        instruction,
+        scoreboard,
+        credits
+    }
+
+    private MenuState currentState;
+    private List<GameObject> allPanels;
+
+    public GameObject buttonPanel;
+    public GameObject instructionPanel;
+    public GameObject scoreboardPanel;
+    public GameObject creditsPanel;
+
+    // key to go back to the menu state after entering one of the other states
+    public KeyCode backKey;
+
+    void Start () {
+        currentState = MenuState.menu;
+        allPanels = new List<GameObject> { buttonPanel, instructionPanel, scoreboardPanel, creditsPanel };
+    }
+
+    void Update () {
+        if (Input.GetKeyDown(backKey)) {
+            currentState = MenuState.menu;
+        }
+
+        SyncState();
+    }
+
+    /**
+     * This method syncs the UI with the currentState variable.
+     */
+    private void SyncState() {
+        HideAllPanels();
+
+        switch (currentState) {
+            case MenuState.menu:
+                buttonPanel.SetActive(true);
+                break;
+            case MenuState.instruction:
+                instructionPanel.SetActive(true);
+                break;
+            case MenuState.scoreboard:
+                scoreboardPanel.SetActive(true);
+                break;
+            case MenuState.credits:
+                creditsPanel.SetActive(true);
+                break;
+            default:
+                Debug.LogError("Unrecognized menu state: " + currentState.ToString());
+                break;
+        }
+    }
+
+    /**
+     * This method loops through allPanels and set each one to inactive.
+     */
+    private void HideAllPanels() {
+        allPanels.ForEach(p => p.SetActive(false));
+    }
+
+    /**
+     * Called when the "Play" button is clicked.
+     */
+    public void PlayGame() {
+        Debug.Log("Play button clicked!");
+    }
+
+    /**
+     * Called when the "Training" button is clicked.
+     */
+    public void EnterTraining() {
+        Debug.Log("Entering training ground!");
+    }
+
+    /**
+     * Called when the "Instruction" button is clicked.
+     */
+    public void ShowInstruction() {
+        Debug.Log("Showing instruction menu!");
+        currentState = MenuState.instruction;
+    }
+
+    /**
+     * Called when the "Score Board" button is clicked.
+     */
+    public void ShowScoreBoard() {
+        Debug.Log("Showing the score board!");
+        currentState = MenuState.scoreboard;
+    }
+
+    /**
+     * Called when the "Credits" button is clicked".
+     */
+    public void ShowCredits() {
+        Debug.Log("Showing the credits!");
+        currentState = MenuState.scoreboard;
+    }
+}
