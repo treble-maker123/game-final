@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 public class MainMenuState : MonoBehaviour {
@@ -9,6 +10,9 @@ public class MainMenuState : MonoBehaviour {
         scoreboard,
         credits
     }
+
+    private const string gameActionSceneName = "GameAction";
+    private const string trainingGroundSceneName = "TrainingGround";
 
     private MenuState currentState;
     private List<GameObject> allPanels;
@@ -70,7 +74,8 @@ public class MainMenuState : MonoBehaviour {
      * Called when the "Play" button is clicked.
      */
     public void PlayGame() {
-        Debug.Log("Play button clicked!");
+        Debug.Log("Play button clicked, loading corresponding scene...");
+        SceneManager.LoadScene(gameActionSceneName, LoadSceneMode.Single);
     }
 
     /**
@@ -78,6 +83,7 @@ public class MainMenuState : MonoBehaviour {
      */
     public void EnterTraining() {
         Debug.Log("Entering training ground!");
+        SceneManager.LoadScene(trainingGroundSceneName, LoadSceneMode.Single);
     }
 
     /**
