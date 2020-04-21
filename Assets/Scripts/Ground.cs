@@ -19,7 +19,8 @@ public class Ground : MonoBehaviour {
         InitializeVariables();
         PositionMainCameraForArialView();
 
-        DrawTiles(currentGrid);
+        currentGrid.GeneratePath(GameState.Difficulty.easy);
+        DrawTiles();
     }
 
     void Update () {
@@ -56,9 +57,10 @@ public class Ground : MonoBehaviour {
     }
 
     /**
-     * Takes a Grid object and draws all the tiles.
+     * Generate all of GameObjects from currentGrid.
      */
-    public void DrawTiles(Grid grid) {
+    public void DrawTiles() {
+        Grid grid = currentGrid;
         Vector3 tileScale = new Vector3(tileWidth, tileHeight, tileLength);
 
         for (int x = 0; x < grid.Width; x++) { // along x-axis in the world
@@ -70,26 +72,31 @@ public class Ground : MonoBehaviour {
                     case Grid.TileType.terrain:
                         tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
                         tile.name = "Terrain-" + x + "," + z;
+                        tile.tag = "TerrainTile";
                         tile.GetComponent<Renderer>().material.color = new Color(0.0f, 0.0f, 0.2f);
                         break;
                     case Grid.TileType.path:
                         tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
                         tile.name = "Path-" + x + "," + z;
+                        tile.tag = "PathTile";
                         tile.GetComponent<Renderer>().material.color = new Color(0.1f, 0.1f, 0.1f);
                         break;
                     case Grid.TileType.start:
                         tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
                         tile.name = "Start-" + x + "," + z;
+                        tile.tag = "StartTile";
                         tile.GetComponent<Renderer>().material.color = new Color(0.0f, 0.5f, 0.0f);
                         break;
                     case Grid.TileType.end:
                         tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
                         tile.name = "End-" + x + "," + z;
+                        tile.tag = "EndTile";
                         tile.GetComponent<Renderer>().material.color = new Color(0.5f, 0.0f, 0.0f);
                         break;
                     case Grid.TileType.border:
                         tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
                         tile.name = "Border-" + x + "," + z;
+                        tile.tag = "BorderTile";
                         tile.GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 0.5f);
                         break;
                     default:
