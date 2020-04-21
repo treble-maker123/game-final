@@ -54,7 +54,7 @@ public class Ground : MonoBehaviour {
         Camera camera = arialViewCamera;
         float fieldWidth = tileWidth * currentGrid.Width;
         float fieldLength = tileLength * currentGrid.Length;
-        camera.transform.position = new Vector3(fieldWidth / 2.0f, arialCameraHeight, fieldLength / 2.0f);
+        camera.transform.position = new Vector3(fieldLength / 2.0f - 4f, arialCameraHeight, fieldWidth / 2.0f - 2f);
         camera.transform.eulerAngles = new Vector3(90.0f, 0.0f, 0.0f);
     }
 

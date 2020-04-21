@@ -235,7 +235,7 @@ MonoBehaviour:
   tileHeight: 1
   topLeftMostX: 0
   topLeftMostZ: 0
-  arialCameraHeight: 80
+  arialCameraHeight: 70
   arialViewCamera: {fileID: 2108116107}
 --- !u!1 &625536683
 GameObject:
@@ -1504,12 +1504,12 @@ Camera:
   m_GameObject: {fileID: 2108116104}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 3
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.7
-    y: 0.6
+    x: 0.8
+    y: 0.7
     width: 1
     height: 1
   near clip plane: 0.3
