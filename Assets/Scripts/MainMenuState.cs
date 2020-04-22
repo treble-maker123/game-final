@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+/**
+ * This class is attached to the controller in MainMenu scene.
+ */
 
 public class MainMenuState : MonoBehaviour {
 

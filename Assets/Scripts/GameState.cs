@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+/**
+ * This class is attached to the GameAction scene's controller to handle various aspects
+ * of the game.
+ */
 
 public class GameState : MonoBehaviour {
     private bool gamePaused;

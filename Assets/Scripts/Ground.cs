@@ -1,4 +1,8 @@
 ﻿using UnityEngine;
+/**
+ * This class is attached to the Ground object in GameAction scene that handles
+ * all of the tile logic.
+ */
 
 public class Ground : MonoBehaviour {
 

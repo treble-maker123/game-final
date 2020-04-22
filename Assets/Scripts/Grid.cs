@@ -10,6 +10,7 @@ public class Grid {
     private int width;
     private int length;
     private TileType[,] state;
+    private List<Position> waypoints;
     private Position startPos = new Position(1,1);
     private Position endPos;
 
@@ -19,6 +20,15 @@ public class Grid {
 
     public int Length {
         get { return length; }
+    }
+
+    /**
+     * Returns a copy of the waypoints for the current state. A waypoint
+     * is a turn in the path, which can be used to help guide NPCs
+     * along the path.
+     */
+    public List<Position> Waypoints {
+        get { return waypoints.ConvertAll(w => (Position) w.Clone()); }
     }
 
     public Grid(int width, int length) {
@@ -63,6 +73,7 @@ public class Grid {
         // start and end points will be fixed
         state[startPos.X,startPos.Y] = TileType.start;
         state[endPos.X,endPos.Y] = TileType.end;
+        waypoints = new List<Position>();
     }
 
     /**
@@ -140,6 +151,9 @@ public class Grid {
                 waypoint.UpdatePosition(endPos.X, endPos.Y);
             }
 
+            // save the waypoint
+            waypoints.Add((Position) waypoint.Clone());
+
             // update the state to build the path
             while (true) {
                 pos.Move(1, dir);
@@ -151,7 +165,9 @@ public class Grid {
                 if (pos == waypoint) break;
             }
 
+            // ============================================
             // figure out direction for the next iteration
+            // ============================================
 
             // if at the bottom row, just go right next time so it will hit the end
             if (pos.Y == length - 2) {
