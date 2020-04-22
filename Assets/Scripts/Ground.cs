@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 /**
  * This class is attached to the Ground object in GameAction scene that handles
  * all of the tile logic.
@@ -67,15 +68,34 @@ public class Ground : MonoBehaviour {
      */
     public void DrawTiles() {
         Grid grid = currentGrid;
+        List<Grid.Position> waypoints = grid.Waypoints;
+        Grid.Position currentPos = new Grid.Position(0, 0);
+        bool isWaypoint = false;
+        Grid.TileType currentTile;
+
         Vector3 tileScale = new Vector3(tileWidth, tileHeight, tileLength);
 
         for (int x = 0; x < grid.Width; x++) { // along x-axis in the world
             for (int z = 0; z < grid.Length; z++) { // along z-axis in the world
+                isWaypoint = false;
+                currentPos.UpdatePosition(x, z);
+                currentTile = grid.At(x,z);
+
+                // figure out if current position is a waypoint if on path
+                if (currentTile == Grid.TileType.path || currentTile == Grid.TileType.end) {
+                    foreach(Grid.Position p in waypoints) {
+                        if (p == currentPos) {
+                            isWaypoint = true;
+                            break;
+                        }
+                    }
+                }
+
                 Vector3 worldPosition = new Vector3(x*tileWidth, 0, z*tileLength);
                 // Vector3 worldPosition = new Vector3(z*tileLength, 0, x*tileWidth);
                 GameObject tile;
 
-                switch(grid.At(x,z)) {
+                switch(currentTile) {
                     case Grid.TileType.terrain:
                         tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
                         tile.name = "Terrain-" + x + "," + z;
@@ -120,6 +140,7 @@ public class Ground : MonoBehaviour {
                 tile.AddComponent<Tile>();
                 tile.GetComponent<Tile>().GridLocX = x;
                 tile.GetComponent<Tile>().GridLocY = z;
+                tile.GetComponent<Tile>().IsWaypoint = isWaypoint;
             }
         }
     }
