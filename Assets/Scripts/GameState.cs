@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 /**
  * This class is attached to the GameAction scene's controller to handle various aspects
  * of the game.
@@ -11,6 +12,7 @@ public class GameState : MonoBehaviour {
     private int level;
     private int lives;
 
+    public GameObject ground;
     public GameObject gameMenuPanel;
     public GameObject gameOverlay;
     public Text livesLeftText;
@@ -61,6 +63,13 @@ public class GameState : MonoBehaviour {
         GamePaused = false;
         Level = 1;
         Lives = 40;
+    }
+
+    /**
+     * This method is called by the mob when it reaches its destination.
+     */
+    public void MobReachesDestination() {
+        Debug.Log("One mob reached its destination!");
     }
 
     /**

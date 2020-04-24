@@ -8,6 +8,12 @@ using System.Collections.Generic;
 public class Ground : MonoBehaviour {
 
     private Grid currentGrid;
+    // these references are assigned in the script for convenience
+    public GameObject startTile;
+    public GameObject endTile;
+    public GameObject[,] tiles;
+    // position and orientation of all of the waypoint GameObjects
+    public List<GameObject> waypointTransforms;
 
     // variables to be configured in unity
     public int gridWidth;
@@ -19,6 +25,7 @@ public class Ground : MonoBehaviour {
     public float topLeftMostX;
     public float topLeftMostZ;
     public float arialCameraHeight;
+    public GameObject sceneController;
 
     public Camera arialViewCamera;
 
@@ -68,6 +75,7 @@ public class Ground : MonoBehaviour {
      */
     public void DrawTiles() {
         Grid grid = currentGrid;
+        tiles = new GameObject[grid.Width,grid.Length];
         List<Grid.Position> waypoints = grid.Waypoints;
         Grid.Position currentPos = new Grid.Position(0, 0);
         bool isWaypoint = false;
@@ -110,12 +118,16 @@ public class Ground : MonoBehaviour {
                         break;
                     case Grid.TileType.start:
                         tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                        startTile = tile;
                         tile.name = "Start-" + x + "," + z;
                         tile.tag = "StartTile";
                         tile.GetComponent<Renderer>().material.color = new Color(0.0f, 0.5f, 0.0f);
+                        tile.AddComponent<SpawnPoint>();
+                        tile.GetComponent<SpawnPoint>().ground = this;
                         break;
                     case Grid.TileType.end:
                         tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                        endTile = tile;
                         tile.name = "End-" + x + "," + z;
                         tile.tag = "EndTile";
                         tile.GetComponent<Renderer>().material.color = new Color(0.5f, 0.0f, 0.0f);
@@ -141,7 +153,17 @@ public class Ground : MonoBehaviour {
                 tile.GetComponent<Tile>().GridLocX = x;
                 tile.GetComponent<Tile>().GridLocY = z;
                 tile.GetComponent<Tile>().IsWaypoint = isWaypoint;
+                // add it to the tiles variable to keep track it
+                tiles[x, z] = tile;
             }
+        }
+
+        // save the waypoints transformations so mobs can follow
+        foreach (Grid.Position w in waypoints) {
+            GameObject tile = tiles[w.X, w.Y];
+            Debug.Assert(tile.name.Contains("Path") || tile.name.Contains("End"));
+            Debug.Assert(tile.GetComponent<Tile>().IsWaypoint);
+            waypointTransforms.Add(tile.GetComponent<Tile>().waypoint);
         }
     }
 }

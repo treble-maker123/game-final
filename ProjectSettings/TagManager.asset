@@ -9,6 +9,8 @@ TagManager:
   - EndTile
   - BorderTile
   - PathTile
+  - Waypoint
+  - Mobs
   layers:
   - Default
   - TransparentFX
