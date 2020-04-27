@@ -24,6 +24,12 @@ public class Gun : MonoBehaviour {
         if(Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hitInfo, range))
         {
             Debug.Log(hitInfo.transform.name);
+            //This is where we'll check if it's a hittable game object that can take damage.
+            if(hitInfo.transform.name == "Mob")
+            {
+                MobInteraction mob = hitInfo.transform.GetComponent<MobInteraction>();
+                mob.TakeDamage(10f);
+            }
         }
     }
 }

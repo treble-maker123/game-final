@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class Healthbar : MonoBehaviour {
 
     public Image healthImage;
-    public int maxHealth;
+    public float maxHealth;
 
     void Start () {
     }
@@ -15,7 +15,7 @@ public class Healthbar : MonoBehaviour {
     /**
      * Sets the number of health points left, with valid range from 0 to maxHealth.
      */
-    public void SetHealth(int newHealth) {
+    public void SetHealth(float newHealth) {
         healthImage.fillAmount = (float) newHealth / (float) maxHealth;
     }
 

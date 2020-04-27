@@ -49,6 +49,8 @@ public class SpawnPoint : MonoBehaviour {
                 mob.GetComponent<FollowWaypoint>().sceneController = ground.sceneController;
                 mob.GetComponent<FollowWaypoint>().onEndReached +=
                     ground.sceneController.GetComponent<GameState>().MobReachesDestination;
+                mob.AddComponent<MobInteraction>();
+                mob.GetComponent<MobInteraction>().maxHealth = 100f;
                 mob.SetActive(true);
                 break;
             default:
