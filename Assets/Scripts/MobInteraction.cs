@@ -21,10 +21,8 @@ public class MobInteraction : MonoBehaviour {
         }
         else
         {
-            //This will eventually somehow call the healthbar script to set the current health/percentage.
-            //But right now, I cannot access the script by trying every way that I can think of.
-            Healthbar hb = this.gameObject.GetComponent<Healthbar>();
-            //hb.SetHealth(currentHealth);
+            Healthbar hb = this.transform.GetComponentInChildren<Healthbar>();
+            hb.SetHealth(currentHealth);
             Debug.Log(hb);
         }
     }
