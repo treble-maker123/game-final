@@ -4,20 +4,11 @@ using UnityEngine;
 
 public class BuildableTile : MonoBehaviour
 {
-
-    public GameObject buildDetector;
-    private GameObject build;
-
     // Use this for initialization
     void Start()
     {
-
-        GameObject buildable = Instantiate(buildDetector, transform.position, Quaternion.identity);
-        buildable.name = "BuildTile";
-        buildable.AddComponent<BuildMenu>();
-        build = buildable;
-        buildable.SetActive(true);
-
+        this.gameObject.name = "BuildTile";
+        this.gameObject.AddComponent<BuildMenu>();
     }
 
 }

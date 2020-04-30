@@ -10,9 +10,15 @@ public class TowerBuildMenu : MonoBehaviour {
     public Button slow;
     public Button close;
 
+    private GameObject player;
+
 	// Use this for initialization
 	void Start () {
         //Get FPS Controller and Disable the Player
+        player = GameObject.Find("Player");
+        player.GetComponent<RigidbodyFirstPersonController>().enabled = false;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
 
         //Regular Tower
         if (totalMoney >= 100)
@@ -52,12 +58,13 @@ public class TowerBuildMenu : MonoBehaviour {
     public void buildReg()
     {
         var buildable = BuildMenu.buildLoc;
-        //Debug.Log("Building Regular!");
+        Debug.Log("Building Regular!");
         Object tur = Resources.Load("RegTurret");
         Instantiate(tur, buildable.transform.position, buildable.transform.rotation);
-        Destroy(buildable);
+        buildable.name = "Tile";
         //Subtract Money
         this.gameObject.SetActive(false);
+        player.GetComponent<RigidbodyFirstPersonController>().enabled = true;
     }
 
     public void buildBomb()
@@ -66,20 +73,22 @@ public class TowerBuildMenu : MonoBehaviour {
         //Debug.Log("Building Bomb!");
         Object tur = Resources.Load("BombTurret");
         Instantiate(tur, buildable.transform.position, buildable.transform.rotation);
-        Destroy(buildable);
+        buildable.name = "Tile";
         //Money
         this.gameObject.SetActive(false);
+        player.GetComponent<RigidbodyFirstPersonController>().enabled = true;
     }
 
     public void buildSlow()
     {
         var buildable = BuildMenu.buildLoc;
-        //Debug.Log("Building Slow!");
+        Debug.Log("Building Slow!");
         Object tur = Resources.Load("SlowTurret");
         Instantiate(tur, buildable.transform.position, buildable.transform.rotation);
-        Destroy(buildable);
+        buildable.name = "Tile";
         //Money
         this.gameObject.SetActive(false);
+        player.GetComponent<RigidbodyFirstPersonController>().enabled = true;
     }
 
 }
