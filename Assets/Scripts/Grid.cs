@@ -228,6 +228,21 @@ public class Grid {
             this.y = y;
         }
 
+        public List<Position> BuildNeighbors() {
+            List<Position> neighbors = new List<Position>() {
+                new Position(X-1, Y-1),
+                new Position(X, Y-1),
+                new Position(Y-1, X+1),
+                new Position(X+1, Y),
+                new Position(X+1, Y+1),
+                new Position(X, Y+1),
+                new Position(X-1, Y+1),
+                new Position(X-1, Y)
+            };
+
+            return neighbors;
+        }
+
         /**
          * Updates the x, y with the new values.
          */

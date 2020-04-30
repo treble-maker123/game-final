@@ -168,5 +168,21 @@ public class Ground : MonoBehaviour {
             Debug.Assert(tile.GetComponent<Tile>().IsWaypoint);
             waypointTransforms.Add(tile.GetComponent<Tile>().waypoint);
         }
+
+
+        // identify neighboring tiles as buildable
+        for (int x = 0; x < grid.Width; x++) {
+            for (int z = 0; z < grid.Length; z++) {
+                currentPos.UpdatePosition(x, z);
+
+                List<Grid.Position> neighbors = currentPos
+                    .BuildNeighbors()
+                    .FindAll(n => !n.OutOfBound(grid));
+
+                foreach (Grid.Position n in neighbors)  {
+                    tiles[n.X, n.Y].GetComponent<Tile>().IsBuildable = true;
+                }
+            }
+        }
     }
 }

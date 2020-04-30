@@ -5,6 +5,7 @@ public class Tile : MonoBehaviour {
     private int gridLocX;
     private int gridLocY;
     private bool isWaypoint;
+    private bool isBuildable;
 
     public GameObject waypoint;
 
@@ -16,6 +17,24 @@ public class Tile : MonoBehaviour {
     public int GridLocY {
         get { return gridLocY; }
         internal set { gridLocY = value; }
+    }
+
+    public bool IsBuildable {
+        get { return isBuildable; }
+        set {
+            bool oldValue = isBuildable;
+            bool newValue = value;
+
+            if (oldValue && oldValue != newValue) {
+                // buildable before, remove the buildable tile component
+                Destroy(gameObject.GetComponents<BuildableTile>()[0]);
+            } else if (!oldValue && oldValue != newValue) {
+                // not buildable before, add the buildable tile component
+                gameObject.AddComponent<BuildableTile>();
+            } else {
+                // nothing changed
+            }
+        }
     }
 
     public bool IsWaypoint {
