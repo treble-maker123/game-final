@@ -11,6 +11,7 @@ public class GameState : MonoBehaviour {
     private bool gamePaused;
     private int level;
     private int lives;
+    private Stage stage;
 
     public GameObject ground;
     public GameObject gameMenuPanel;
@@ -49,6 +50,10 @@ public class GameState : MonoBehaviour {
         }
     }
 
+    public Stage CurrentStage {
+        get { return stage; }
+    }
+
     void Start () {
         InitializeVariables();
     }
@@ -56,6 +61,24 @@ public class GameState : MonoBehaviour {
     void Update () {
         if (Input.GetKeyDown(pauseKey)) {
             GamePaused = !GamePaused;
+        }
+
+        if (GamePaused) {
+            // Stop updating
+        }
+
+        switch(stage) {
+            case Stage.Countdown:
+                break;
+            case Stage.Build:
+                break;
+            case Stage.Spawn:
+                break;
+            case Stage.Tally:
+                break;
+            default:
+                Debug.LogError("Unrecognized stage: " + stage.ToString());
+                break;
         }
     }
 
@@ -90,5 +113,15 @@ public class GameState : MonoBehaviour {
         easy,
         medium,
         hard
+    }
+
+    /**
+     * Denotes which stage the game is on right now
+     */
+    public enum Stage {
+        Countdown, // a brief countdown for the player to get ready
+        Build, // a window where the players can build towers
+        Spawn, // mobs spawn during this time
+        Tally // points are tallied during this time
     }
 }
