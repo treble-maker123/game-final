@@ -7,12 +7,12 @@ public class MobInteraction : MonoBehaviour {
     public float maxHealth = 100f;
     public float currentHealth;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         currentHealth = maxHealth;
-	}
-	
-	public void TakeDamage(float damage)
+    }
+
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         if (currentHealth <= 0)
@@ -23,7 +23,6 @@ public class MobInteraction : MonoBehaviour {
         {
             Healthbar hb = this.transform.GetComponentInChildren<Healthbar>();
             hb.SetHealth(currentHealth);
-            Debug.Log(hb);
         }
     }
 }

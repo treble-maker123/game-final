@@ -26,6 +26,7 @@ public class Ground : MonoBehaviour {
     public float topLeftMostZ;
     public float arialCameraHeight;
     public GameObject sceneController;
+    public GameObject player;
 
     public Camera arialViewCamera;
 
@@ -122,8 +123,10 @@ public class Ground : MonoBehaviour {
                         tile.name = "Start-" + x + "," + z;
                         tile.tag = "StartTile";
                         tile.GetComponent<Renderer>().material.color = new Color(0.0f, 0.5f, 0.0f);
+
                         tile.AddComponent<SpawnPoint>();
                         tile.GetComponent<SpawnPoint>().ground = this;
+                        tile.GetComponent<SpawnPoint>().player = player;
                         break;
                     case Grid.TileType.end:
                         tile = GameObject.CreatePrimitive(PrimitiveType.Cube);

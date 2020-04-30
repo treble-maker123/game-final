@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class Healthbar : MonoBehaviour {
 
+    public GameObject player;
     public Image healthImage;
     public float maxHealth;
 
@@ -10,6 +11,9 @@ public class Healthbar : MonoBehaviour {
     }
 
     void Update () {
+        transform.LookAt(
+                transform.position + player.transform.rotation * Vector3.back,
+                player.transform.rotation * Vector3.up);
     }
 
     /**

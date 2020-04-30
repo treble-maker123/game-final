@@ -268,6 +268,7 @@ MonoBehaviour:
   topLeftMostZ: 0
   arialCameraHeight: 70
   sceneController: {fileID: 1556268067}
+  player: {fileID: 1754647979}
   arialViewCamera: {fileID: 2108116107}
 --- !u!1 &625536683
 GameObject:
@@ -1203,6 +1204,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1754647979 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1718184303988930, guid: 75a3187c48ddd5a48b80146d2b7618fc,
+    type: 2}
+  m_PrefabInternal: {fileID: 860442054}
 --- !u!1 &1857533852
 GameObject:
   m_ObjectHideFlags: 0
