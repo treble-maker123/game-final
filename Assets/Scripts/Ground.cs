@@ -174,13 +174,21 @@ public class Ground : MonoBehaviour {
         for (int x = 0; x < grid.Width; x++) {
             for (int z = 0; z < grid.Length; z++) {
                 currentPos.UpdatePosition(x, z);
+                GameObject tile = tiles[currentPos.X, currentPos.Y];
+
+                if (!tile.tag.Contains("Path")) {
+                    continue;
+                }
 
                 List<Grid.Position> neighbors = currentPos
                     .BuildNeighbors()
                     .FindAll(n => !n.OutOfBound(grid));
 
                 foreach (Grid.Position n in neighbors)  {
-                    tiles[n.X, n.Y].GetComponent<Tile>().IsBuildable = true;
+                    GameObject neighbor = tiles[n.X, n.Y];
+                    if (neighbor.tag.Contains("Terrain")) {
+                        neighbor.GetComponent<Tile>().IsBuildable = true;
+                    }
                 }
             }
         }
