@@ -10,9 +10,15 @@ public class TowerBuildMenu : MonoBehaviour {
     public Button slow;
     public Button close;
 
+    private GameObject player;
+
 	// Use this for initialization
 	void Start () {
         //Get FPS Controller and Disable the Player
+        player = GameObject.Find("Player");
+        player.GetComponent<RigidbodyFirstPersonController>().enabled = false;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
 
         //Regular Tower
         if (totalMoney >= 100)
@@ -58,6 +64,7 @@ public class TowerBuildMenu : MonoBehaviour {
         buildable.name = "Tile";
         //Subtract Money
         this.gameObject.SetActive(false);
+        player.GetComponent<RigidbodyFirstPersonController>().enabled = true;
     }
 
     public void buildBomb()
@@ -69,6 +76,7 @@ public class TowerBuildMenu : MonoBehaviour {
         buildable.name = "Tile";
         //Money
         this.gameObject.SetActive(false);
+        player.GetComponent<RigidbodyFirstPersonController>().enabled = true;
     }
 
     public void buildSlow()
@@ -80,6 +88,7 @@ public class TowerBuildMenu : MonoBehaviour {
         buildable.name = "Tile";
         //Money
         this.gameObject.SetActive(false);
+        player.GetComponent<RigidbodyFirstPersonController>().enabled = true;
     }
 
 }
