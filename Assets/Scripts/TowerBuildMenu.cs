@@ -52,10 +52,10 @@ public class TowerBuildMenu : MonoBehaviour {
     public void buildReg()
     {
         var buildable = BuildMenu.buildLoc;
-        //Debug.Log("Building Regular!");
+        Debug.Log("Building Regular!");
         Object tur = Resources.Load("RegTurret");
         Instantiate(tur, buildable.transform.position, buildable.transform.rotation);
-        Destroy(buildable);
+        buildable.name = "Tile";
         //Subtract Money
         this.gameObject.SetActive(false);
     }
@@ -66,7 +66,7 @@ public class TowerBuildMenu : MonoBehaviour {
         //Debug.Log("Building Bomb!");
         Object tur = Resources.Load("BombTurret");
         Instantiate(tur, buildable.transform.position, buildable.transform.rotation);
-        Destroy(buildable);
+        buildable.name = "Tile";
         //Money
         this.gameObject.SetActive(false);
     }
@@ -74,10 +74,10 @@ public class TowerBuildMenu : MonoBehaviour {
     public void buildSlow()
     {
         var buildable = BuildMenu.buildLoc;
-        //Debug.Log("Building Slow!");
+        Debug.Log("Building Slow!");
         Object tur = Resources.Load("SlowTurret");
         Instantiate(tur, buildable.transform.position, buildable.transform.rotation);
-        Destroy(buildable);
+        buildable.name = "Tile";
         //Money
         this.gameObject.SetActive(false);
     }
