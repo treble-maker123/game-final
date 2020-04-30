@@ -51,23 +51,34 @@ public class TowerBuildMenu : MonoBehaviour {
 
     public void buildReg()
     {
-        //var e = BuildMenu.buildLoc;
-        //Debug.Log(e);
-        Debug.Log("Building Regular!");
+        var buildable = BuildMenu.buildLoc;
+        //Debug.Log("Building Regular!");
+        Object tur = Resources.Load("RegTurret");
+        Instantiate(tur, buildable.transform.position, buildable.transform.rotation);
+        Destroy(buildable);
         //Subtract Money
-        //Instantiate Turret
         this.gameObject.SetActive(false);
     }
 
     public void buildBomb()
     {
-        Debug.Log("Building Bomb!");
+        var buildable = BuildMenu.buildLoc;
+        //Debug.Log("Building Bomb!");
+        Object tur = Resources.Load("BombTurret");
+        Instantiate(tur, buildable.transform.position, buildable.transform.rotation);
+        Destroy(buildable);
+        //Money
         this.gameObject.SetActive(false);
     }
 
     public void buildSlow()
     {
-        Debug.Log("Building Slow!");
+        var buildable = BuildMenu.buildLoc;
+        //Debug.Log("Building Slow!");
+        Object tur = Resources.Load("SlowTurret");
+        Instantiate(tur, buildable.transform.position, buildable.transform.rotation);
+        Destroy(buildable);
+        //Money
         this.gameObject.SetActive(false);
     }
 
