@@ -40,19 +40,20 @@ public class SpawnPoint : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            StartCoroutine("SpawnCoroutine");
-        }
+        // if (Input.GetKeyDown(KeyCode.Space)) {
+            // IEnumerator spawnCoroutine = StartSpawn(5, MobType.mob1, 2.0f);
+            // StartCoroutine(spawnCoroutine);
+        // }
     }
 
     /**
      * For coroutines to start spawning mobs.
      */
-    IEnumerator SpawnCoroutine() {
-        while (!SpawnPoint.GamePaused && numSpawned < SpawnPoint.NumToSpawn) {
-            SpawnMob(SpawnPoint.TypeToSpawn);
+    public IEnumerator StartSpawn(int numToSpawn, MobType type, float interval) {
+        while (!SpawnPoint.GamePaused && numSpawned < numToSpawn) {
+            SpawnMob(type);
             numSpawned++;
-            yield return new WaitForSeconds(SpawnPoint.SpawnInterval);
+            yield return new WaitForSeconds(interval);
         }
     }
 
