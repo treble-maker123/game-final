@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
 /**
  * This class is attached to the GameAction scene's controller to handle various aspects
  * of the game.
@@ -12,12 +11,19 @@ public class GameState : MonoBehaviour {
     private int level;
     private int lives;
     private Stage stage;
+    private SpawnPoint spawn;
+    private bool spawning;
 
     public GameObject ground;
     public GameObject gameMenuPanel;
     public GameObject gameOverlay;
     public Text livesLeftText;
     public KeyCode pauseKey;
+
+    // variables related to spawning mobs
+    public int numMobsToSpawn;
+    public float spawnInterval;
+    public SpawnPoint.MobType mobType;
 
     public bool GamePaused {
         get { return gamePaused; }
@@ -56,12 +62,18 @@ public class GameState : MonoBehaviour {
 
     void Start () {
         InitializeVariables();
+        spawn = ground.GetComponentInChildren<SpawnPoint>();
+
+        // TEMPORARY, TODO: REMOVE
+        stage = Stage.Spawn;
     }
 
     void Update () {
         if (Input.GetKeyDown(pauseKey)) {
             GamePaused = !GamePaused;
         }
+
+        SpawnPoint.GamePaused = GamePaused;
 
         if (GamePaused) {
             // Stop updating
@@ -73,6 +85,15 @@ public class GameState : MonoBehaviour {
             case Stage.Build:
                 break;
             case Stage.Spawn:
+                SpawnPoint.SpawnInterval = spawnInterval;
+                SpawnPoint.NumToSpawn = numMobsToSpawn;
+                SpawnPoint.TypeToSpawn = mobType;
+
+                if (!spawning) {
+                    Debug.Log("Start spawning " + numMobsToSpawn + " mobs of type " + mobType.ToString() + " with an interval of " + spawnInterval);
+                    spawn.StartCoroutine("SpawnCoroutine");
+                    spawning = true;
+                }
                 break;
             case Stage.Tally:
                 break;
@@ -122,6 +143,7 @@ public class GameState : MonoBehaviour {
         Countdown, // a brief countdown for the player to get ready
         Build, // a window where the players can build towers
         Spawn, // mobs spawn during this time
+        Battle, // this is between the end of spawning and when the last mob reaches destination
         Tally // points are tallied during this time
     }
 }

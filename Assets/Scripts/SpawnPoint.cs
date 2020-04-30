@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 /**
  * This class contains the behavior associated with the spawning tile and is attached
  * to the starting tile in Ground.cs
@@ -7,9 +8,23 @@
 public class SpawnPoint : MonoBehaviour {
 
     private GameObject enemies;
+    private int numSpawned;
 
     public GameObject player;
     public Ground ground;
+
+    public static bool GamePaused = false;
+    public static float SpawnInterval = 2.0f;
+    public static int NumToSpawn = 10;
+    public static MobType TypeToSpawn = MobType.mob1;
+
+    /**
+     * The number of mobs spawned in the current iteration. Call reset
+     * to reset the counter;
+     */
+    public int NumSpawned {
+        get { return numSpawned; }
+    }
 
     // Use this for initialization
     void Start () {
@@ -26,7 +41,18 @@ public class SpawnPoint : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         if (Input.GetKeyDown(KeyCode.Space)) {
-            SpawnMob(MobType.mob1);
+            StartCoroutine("SpawnCoroutine");
+        }
+    }
+
+    /**
+     * For coroutines to start spawning mobs.
+     */
+    IEnumerator SpawnCoroutine() {
+        while (!SpawnPoint.GamePaused && numSpawned < SpawnPoint.NumToSpawn) {
+            SpawnMob(SpawnPoint.TypeToSpawn);
+            numSpawned++;
+            yield return new WaitForSeconds(SpawnPoint.SpawnInterval);
         }
     }
 
@@ -66,6 +92,13 @@ public class SpawnPoint : MonoBehaviour {
             default:
                 return;
         }
+    }
+
+    /**
+     * Resets the counter for the number of mobs respawned for this iteration.
+     */
+    public void ResetCounter() {
+        numSpawned = 0;
     }
 
     public enum MobType {
