@@ -4,17 +4,19 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class TowerBuildMenu : MonoBehaviour {
 
-    public int totalMoney = 600;
+    public int totalMoney;
     public Button reg;
     public Button bomb;
     public Button slow;
     public Button close;
 
     private GameObject player;
+    private GameObject scene;
 
-	// Use this for initialization
-	void Start () {
-        Debug.Log(totalMoney);
+    void Start()
+    {
+        scene = GameObject.FindGameObjectWithTag("SC");
+        totalMoney = scene.GetComponent<GameState>().StartingGold;
         //Get FPS Controller and Disable the Player
         player = GameObject.Find("Player");
         player.GetComponent<RigidbodyFirstPersonController>().enabled = false;
@@ -59,11 +61,12 @@ public class TowerBuildMenu : MonoBehaviour {
     public void buildReg()
     {
         var buildable = BuildMenu.buildLoc;
-        Debug.Log("Building Regular!");
         Object tur = Resources.Load("RegTurret");
         Instantiate(tur, buildable.transform.position + new Vector3(0f, 0.5f, 0), buildable.transform.rotation);
         buildable.name = "Tile";
         //Subtract Money
+        scene.GetComponent<GameState>().StartingGold = scene.GetComponent<GameState>().StartingGold - 100;
+
         this.gameObject.SetActive(false);
         player.GetComponent<RigidbodyFirstPersonController>().enabled = true;
     }
@@ -71,11 +74,12 @@ public class TowerBuildMenu : MonoBehaviour {
     public void buildBomb()
     {
         var buildable = BuildMenu.buildLoc;
-        //Debug.Log("Building Bomb!");
         Object tur = Resources.Load("BombTurret");
         Instantiate(tur, buildable.transform.position + new Vector3(0f, 0.5f, 0), buildable.transform.rotation);
         buildable.name = "Tile";
         //Money
+        scene.GetComponent<GameState>().StartingGold = scene.GetComponent<GameState>().StartingGold - 300;
+
         this.gameObject.SetActive(false);
         player.GetComponent<RigidbodyFirstPersonController>().enabled = true;
     }
@@ -83,11 +87,12 @@ public class TowerBuildMenu : MonoBehaviour {
     public void buildSlow()
     {
         var buildable = BuildMenu.buildLoc;
-        Debug.Log("Building Slow!");
         Object tur = Resources.Load("SlowTurret");
         Instantiate(tur, buildable.transform.position + new Vector3(0f, 0.5f, 0), buildable.transform.rotation);
         buildable.name = "Tile";
         //Money
+        scene.GetComponent<GameState>().StartingGold = scene.GetComponent<GameState>().StartingGold - 200;
+
         this.gameObject.SetActive(false);
         player.GetComponent<RigidbodyFirstPersonController>().enabled = true;
     }

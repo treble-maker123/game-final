@@ -13,6 +13,7 @@ TagManager:
   - Mobs
   - Health
   - Trees
+  - SC
   layers:
   - Default
   - TransparentFX

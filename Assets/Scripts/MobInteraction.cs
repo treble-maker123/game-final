@@ -18,6 +18,9 @@ public class MobInteraction : MonoBehaviour {
         if (currentHealth <= 0)
         {
             Destroy(this.gameObject);
+            //Temp money add
+            GameObject scene = GameObject.FindGameObjectWithTag("SC");
+            scene.GetComponent<GameState>().StartingGold += 50;
         }
         else
         {
