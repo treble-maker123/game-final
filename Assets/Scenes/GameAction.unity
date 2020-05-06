@@ -268,7 +268,7 @@ MonoBehaviour:
   topLeftMostZ: 0
   arialCameraHeight: 70
   sceneController: {fileID: 1556268067}
-  player: {fileID: 0}
+  player: {fileID: 2009410522}
   arialViewCamera: {fileID: 2108116107}
 --- !u!1 &625536683
 GameObject:
@@ -1622,6 +1622,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1981210338}
+--- !u!1 &2009410522 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1582272525272832, guid: 75a3187c48ddd5a48b80146d2b7618fc,
+    type: 2}
+  m_PrefabInternal: {fileID: 884496621}
 --- !u!1 &2086313593
 GameObject:
   m_ObjectHideFlags: 0

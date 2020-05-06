@@ -40,10 +40,6 @@ public class SpawnPoint : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        // if (Input.GetKeyDown(KeyCode.Space)) {
-            // IEnumerator spawnCoroutine = StartSpawn(5, MobType.mob1, 2.0f);
-            // StartCoroutine(spawnCoroutine);
-        // }
     }
 
     /**
@@ -68,31 +64,36 @@ public class SpawnPoint : MonoBehaviour {
                 mob = Instantiate(Resources.Load("Mob1")) as GameObject;
                 mob.name = "Mob";
                 mob.tag = "Mobs";
-                // Set as a child of the enmies GameObject
-                mob.transform.parent = enemies.transform;
-                mob.transform.position = transform.position + new Vector3(0.0f, 2.0f, 0.0f);
-                // Add rigitbody
-                mob.AddComponent<Rigidbody>();
-                mob.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY
-                    | RigidbodyConstraints.FreezeRotationX
-                    | RigidbodyConstraints.FreezeRotationZ;
-                // Setup waypoint-following script
-                mob.AddComponent<FollowWaypoint>();
-                mob.GetComponent<FollowWaypoint>().waypoints = ground.waypointTransforms;
-                mob.GetComponent<FollowWaypoint>().sceneController = ground.sceneController;
-                mob.GetComponent<FollowWaypoint>().onEndReached +=
-                    ground.sceneController.GetComponent<GameState>().MobReachesDestination;
-                // Setup healthbar to have a reference of where the player is
-                Healthbar hb = mob.GetComponentInChildren<Healthbar>();
-                hb.player = player;
 
                 mob.AddComponent<MobInteraction>();
                 mob.GetComponent<MobInteraction>().maxHealth = 100f;
-                mob.SetActive(true);
                 break;
             default:
                 return;
         }
+
+        // Set as a child of the enmies GameObject
+        mob.transform.parent = enemies.transform;
+        mob.transform.position = transform.position + new Vector3(0.0f, 2.0f, 0.0f);
+
+        // Add rigitbody
+        mob.AddComponent<Rigidbody>();
+            mob.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY
+                | RigidbodyConstraints.FreezeRotationX
+                | RigidbodyConstraints.FreezeRotationZ;
+
+        // Setup waypoint-following script
+        mob.AddComponent<FollowWaypoint>();
+        mob.GetComponent<FollowWaypoint>().waypoints = ground.waypointTransforms;
+        mob.GetComponent<FollowWaypoint>().sceneController = ground.sceneController;
+        mob.GetComponent<FollowWaypoint>().onEndReached +=
+            ground.sceneController.GetComponent<GameState>().MobReachesDestination;
+
+        // Setup healthbar to have a reference of where the player is
+        Healthbar hb = mob.GetComponentInChildren<Healthbar>();
+            hb.player = player;
+
+        mob.SetActive(true);
     }
 
     /**
