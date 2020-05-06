@@ -12,6 +12,7 @@ TagManager:
   - Waypoint
   - Mobs
   - Health
+  - Trees
   layers:
   - Default
   - TransparentFX

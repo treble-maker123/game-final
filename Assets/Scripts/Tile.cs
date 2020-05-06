@@ -28,9 +28,17 @@ public class Tile : MonoBehaviour {
             if (oldValue && oldValue != newValue) {
                 // buildable before, remove the buildable tile component
                 Destroy(gameObject.GetComponents<BuildableTile>()[0]);
+
+                GetComponent<Renderer>().material.mainTexture =
+                    Resources.Load<Texture2D>(Ground.TerrainTexture);
+                // GetComponent<Renderer>().material.mainTexture =
             } else if (!oldValue && oldValue != newValue) {
                 // not buildable before, add the buildable tile component
                 gameObject.AddComponent<BuildableTile>();
+
+                GetComponent<Renderer>().material.mainTexture =
+                    Resources.Load<Texture2D>(Ground.BuildableTileTexture);
+
             } else {
                 // nothing changed
             }

@@ -30,6 +30,11 @@ public class Ground : MonoBehaviour {
 
     public Camera arialViewCamera;
 
+    public static readonly string BorderTexture = "Environment/TerrainAssets/SurfaceTextures/GrassRockyAlbedo";
+    public static readonly string PathTexture = "Environment/TerrainAssets/SurfaceTextures/SandAlbedo";
+    public static readonly string TerrainTexture = "Environment/TerrainAssets/SurfaceTextures/GrassHillAlbedo";
+    public static readonly string BuildableTileTexture = "Environment/TerrainAssets/SurfaceTextures/MudRockyAlbedoSpecular";
+
     void Start () {
         AssertCorrectConfiguration();
         InitializeVariables();
@@ -109,13 +114,17 @@ public class Ground : MonoBehaviour {
                         tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
                         tile.name = "Terrain-" + x + "," + z;
                         tile.tag = "TerrainTile";
-                        tile.GetComponent<Renderer>().material.color = new Color(0.0f, 0.0f, 0.2f);
+
+                        tile.GetComponent<Renderer>().material.mainTexture =
+                            Resources.Load<Texture2D>(TerrainTexture);
                         break;
                     case Grid.TileType.path:
                         tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
                         tile.name = "Path-" + x + "," + z;
                         tile.tag = "PathTile";
-                        tile.GetComponent<Renderer>().material.color = new Color(0.1f, 0.1f, 0.1f);
+
+                        tile.GetComponent<Renderer>().material.mainTexture =
+                            Resources.Load<Texture2D>(PathTexture);
                         break;
                     case Grid.TileType.start:
                         tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -139,7 +148,10 @@ public class Ground : MonoBehaviour {
                         tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
                         tile.name = "Border-" + x + "," + z;
                         tile.tag = "BorderTile";
-                        tile.GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 0.5f);
+
+                        tile.AddComponent<Border>();
+                        tile.GetComponent<Renderer>().material.mainTexture =
+                            Resources.Load<Texture2D>(BorderTexture);
                         break;
                     default:
                         Debug.LogError("Unrecognized tile type: " + grid.At(x,z).ToString());
@@ -188,6 +200,9 @@ public class Ground : MonoBehaviour {
                     GameObject neighbor = tiles[n.X, n.Y];
                     if (neighbor.tag.Contains("Terrain")) {
                         neighbor.GetComponent<Tile>().IsBuildable = true;
+
+                        neighbor.GetComponent<Renderer>().material.mainTexture =
+                            Resources.Load<Texture2D>("Environment/TerrainAssets/SurfaceTextures/MudRockyAlbedoSpecular");
                     }
                 }
             }
