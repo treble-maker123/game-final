@@ -68,6 +68,7 @@ public class SpawnPoint : MonoBehaviour {
 
                 mob.AddComponent<Rigidbody>();
                 mob.AddComponent<SphereCollider>();
+                mob.AddComponent<SphereCollider>().radius = 0.5f;
 
                 mob.AddComponent<MobInteraction>();
                 mob.GetComponent<MobInteraction>().maxHealth = 100f;
@@ -78,9 +79,10 @@ public class SpawnPoint : MonoBehaviour {
                 mob.transform.position = new Vector3(5f, 0.5f, 5f);
 
                 mob.AddComponent<Rigidbody>();
-                mob.AddComponent<SphereCollider>();
+                mob.AddComponent<BoxCollider>();
                 // raise the collider so the skeleton is not levitated
-                mob.GetComponent<SphereCollider>().center = new Vector3(0f, 0.5f, 0f);
+                mob.GetComponent<BoxCollider>().center = new Vector3(0f, 1.1f, 0f);
+                mob.GetComponent<BoxCollider>().size = new Vector3(0.7f, 2.1f, 0.7f);
 
                 // programmatically add a healthbar
                 GameObject healthbar = Instantiate(Resources.Load("Healthbar")) as GameObject;
@@ -92,11 +94,9 @@ public class SpawnPoint : MonoBehaviour {
                 mob.AddComponent<Animation>();
                 AnimationClip clip = Resources.Load<AnimationClip>("Skeletons_demo/animation/DS_onehand_walk");
                 clip.legacy = true;
-                Debug.Log("Clip looping: " + clip.isLooping);
                 mob.GetComponent<Animation>().AddClip(clip, "walk");
                 mob.GetComponent<Animation>().wrapMode = WrapMode.Loop;
                 mob.GetComponent<Animation>().Play("walk");
-
 
                 mob.AddComponent<MobInteraction>();
                 mob.GetComponent<MobInteraction>().maxHealth = 100f;
@@ -124,8 +124,6 @@ public class SpawnPoint : MonoBehaviour {
             ground.sceneController.GetComponent<GameState>().MobReachesDestination;
 
         // Setup collider
-        mob.GetComponent<SphereCollider>().radius = 0.5f;
-
         Physics.IgnoreCollision(
                 mob.GetComponent<Collider>(),
                 player.GetComponent<Collider>());

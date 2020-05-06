@@ -7,14 +7,14 @@ public class Gun : MonoBehaviour {
     public ParticleSystem muzzleFlash;
 
     public Camera fpsCamera;
-	
-	// Update is called once per frame
-	void Update () {
-		if(Input.GetButtonDown("Fire1"))
+
+    // Update is called once per frame
+    void Update () {
+        if(Input.GetButtonDown("Fire1"))
         {
             Shoot();
         }
-	}
+    }
 
     void Shoot()
     {
@@ -25,7 +25,7 @@ public class Gun : MonoBehaviour {
         {
             Debug.Log(hitInfo.transform.name);
             //This is where we'll check if it's a hittable game object that can take damage.
-            if(hitInfo.transform.name == "Mob")
+            if(hitInfo.transform.tag == "Mobs")
             {
                 MobInteraction mob = hitInfo.transform.GetComponent<MobInteraction>();
                 mob.TakeDamage(10f);
