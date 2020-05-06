@@ -61,7 +61,7 @@ public class SpawnPoint : MonoBehaviour {
 
         switch(type) {
             case MobType.mob1:
-                mob = Instantiate(Resources.Load("Mob1")) as GameObject;
+                mob = Instantiate(Resources.Load("mob1")) as GameObject;
                 mob.name = "Mob";
 
                 mob.transform.position = transform.position + new Vector3(0.0f, 2.0f, 0.0f);
@@ -87,6 +87,16 @@ public class SpawnPoint : MonoBehaviour {
                 healthbar.name = "Healthbar";
                 healthbar.transform.parent = mob.transform;
                 healthbar.transform.localPosition = new Vector3(0f, 3f, 0f);
+
+                // setup animation
+                mob.AddComponent<Animation>();
+                AnimationClip clip = Resources.Load<AnimationClip>("Skeletons_demo/animation/DS_onehand_walk");
+                clip.legacy = true;
+                Debug.Log("Clip looping: " + clip.isLooping);
+                mob.GetComponent<Animation>().AddClip(clip, "walk");
+                mob.GetComponent<Animation>().wrapMode = WrapMode.Loop;
+                mob.GetComponent<Animation>().Play("walk");
+
 
                 mob.AddComponent<MobInteraction>();
                 mob.GetComponent<MobInteraction>().maxHealth = 100f;
