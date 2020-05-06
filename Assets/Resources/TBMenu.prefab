@@ -790,7 +790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b346ca0b450d4ab4db18ad261d700f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalMoney: 200
+  totalMoney: 2000
   reg: {fileID: 114595508481025518}
   bomb: {fileID: 114170502023406556}
   slow: {fileID: 114088514010990816}
