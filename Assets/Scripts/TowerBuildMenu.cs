@@ -52,7 +52,7 @@ public class TowerBuildMenu : MonoBehaviour {
     public void closeMenu()
     {
         this.gameObject.SetActive(false);
-        //Enable FPS Controller
+        player.GetComponent<RigidbodyFirstPersonController>().enabled = true;
     }
 
     public void buildReg()
