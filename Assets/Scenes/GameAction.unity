@@ -1203,7 +1203,7 @@ MonoBehaviour:
   secondsToBuild: 0
   numMobsToSpawn: 0
   spawnInterval: 0
-  mobType: 0
+  mobType: 1
   TotalLives: 40
   StartingGold: 200
 --- !u!1 &1592801180

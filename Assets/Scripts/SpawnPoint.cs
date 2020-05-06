@@ -63,7 +63,28 @@ public class SpawnPoint : MonoBehaviour {
             case MobType.mob1:
                 mob = Instantiate(Resources.Load("Mob1")) as GameObject;
                 mob.name = "Mob";
-                mob.tag = "Mobs";
+
+                mob.transform.position = transform.position + new Vector3(0.0f, 2.0f, 0.0f);
+
+                mob.AddComponent<Rigidbody>();
+                mob.AddComponent<SphereCollider>();
+
+                mob.AddComponent<MobInteraction>();
+                mob.GetComponent<MobInteraction>().maxHealth = 100f;
+                break;
+            case MobType.skeleton:
+                mob = Instantiate(Resources.Load("Skeletons_demo/models/DungeonSkeleton_demo")) as GameObject;
+                mob.name = "Skeleton";
+                mob.transform.position = new Vector3(5f, 0.5f, 5f);
+
+                mob.AddComponent<Rigidbody>();
+                mob.AddComponent<SphereCollider>();
+                mob.GetComponent<SphereCollider>().center = new Vector3(0f, 0.5f, 0f);
+
+                GameObject healthbar = Instantiate(Resources.Load("Healthbar")) as GameObject;
+                healthbar.name = "Healthbar";
+                healthbar.transform.parent = mob.transform;
+                healthbar.transform.localPosition = new Vector3(0f, 3f, 0f);
 
                 mob.AddComponent<MobInteraction>();
                 mob.GetComponent<MobInteraction>().maxHealth = 100f;
@@ -72,15 +93,16 @@ public class SpawnPoint : MonoBehaviour {
                 return;
         }
 
+        mob.tag = "Mobs";
+
         // Set as a child of the enmies GameObject
         mob.transform.parent = enemies.transform;
-        mob.transform.position = transform.position + new Vector3(0.0f, 2.0f, 0.0f);
 
-        // Add rigitbody
-        mob.AddComponent<Rigidbody>();
-            mob.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY
-                | RigidbodyConstraints.FreezeRotationX
+        // setup rigidbody
+        mob.GetComponent<Rigidbody>().constraints =
+                RigidbodyConstraints.FreezeRotationX
                 | RigidbodyConstraints.FreezeRotationZ;
+        mob.GetComponent<Rigidbody>().mass = 5;
 
         // Setup waypoint-following script
         mob.AddComponent<FollowWaypoint>();
@@ -89,13 +111,16 @@ public class SpawnPoint : MonoBehaviour {
         mob.GetComponent<FollowWaypoint>().onEndReached +=
             ground.sceneController.GetComponent<GameState>().MobReachesDestination;
 
+        // Setup collider
+        mob.GetComponent<SphereCollider>().radius = 0.5f;
+
         Physics.IgnoreCollision(
                 mob.GetComponent<Collider>(),
                 player.GetComponent<Collider>());
 
         // Setup healthbar to have a reference of where the player is
         Healthbar hb = mob.GetComponentInChildren<Healthbar>();
-            hb.player = player;
+        hb.player = player;
 
         mob.SetActive(true);
     }
@@ -108,6 +133,7 @@ public class SpawnPoint : MonoBehaviour {
     }
 
     public enum MobType {
-        mob1
+        mob1,
+        skeleton
     }
 }

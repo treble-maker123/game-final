@@ -26,7 +26,11 @@ public class FollowWaypoint : MonoBehaviour {
             GameObject currentWaypoint = waypoints[currentPos];
             Vector3 direction = currentWaypoint.transform.position - transform.position;
             direction /= direction.magnitude;
-            transform.position += direction * (speed * Time.deltaTime);
+            Vector3 delta = direction * (speed * Time.deltaTime);
+            Vector3 newPos = transform.position;
+            newPos.x += delta.x;
+            newPos.z += delta.z;
+            transform.position = newPos;
         }
     }
 

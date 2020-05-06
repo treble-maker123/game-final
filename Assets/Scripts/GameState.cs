@@ -91,10 +91,10 @@ public class GameState : MonoBehaviour {
         Lives = TotalLives;
         Gold = StartingGold;
 
-        secondsToBuild = 10;
+        secondsToBuild = 2;
 
         numMobsToSpawn = 10;
-        mobType = SpawnPoint.MobType.mob1;
+        mobType = SpawnPoint.MobType.skeleton;
         spawnInterval = 2.0f;
     }
 
