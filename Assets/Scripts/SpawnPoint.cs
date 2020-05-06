@@ -79,8 +79,10 @@ public class SpawnPoint : MonoBehaviour {
 
                 mob.AddComponent<Rigidbody>();
                 mob.AddComponent<SphereCollider>();
+                // raise the collider so the skeleton is not levitated
                 mob.GetComponent<SphereCollider>().center = new Vector3(0f, 0.5f, 0f);
 
+                // programmatically add a healthbar
                 GameObject healthbar = Instantiate(Resources.Load("Healthbar")) as GameObject;
                 healthbar.name = "Healthbar";
                 healthbar.transform.parent = mob.transform;

@@ -25,12 +25,24 @@ public class FollowWaypoint : MonoBehaviour {
         if (currentPos < waypoints.Count) {
             GameObject currentWaypoint = waypoints[currentPos];
             Vector3 direction = currentWaypoint.transform.position - transform.position;
+            float step = speed * Time.deltaTime;
+
+            // update position
             direction /= direction.magnitude;
-            Vector3 delta = direction * (speed * Time.deltaTime);
+            Vector3 delta = direction * step;
             Vector3 newPos = transform.position;
+            // don't update y
             newPos.x += delta.x;
             newPos.z += delta.z;
             transform.position = newPos;
+
+            // update direction
+            Vector3 newDir = Vector3.RotateTowards(transform.forward, direction, step, 0.0f);
+            // only rotate around y
+            Quaternion newRotation = Quaternion.LookRotation(newDir);
+            newRotation.x = 0f;
+            newRotation.z = 0f;
+            transform.rotation = newRotation;
         }
     }
 
