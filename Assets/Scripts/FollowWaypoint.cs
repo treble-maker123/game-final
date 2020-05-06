@@ -31,6 +31,10 @@ public class FollowWaypoint : MonoBehaviour {
     }
 
     void OnCollisionEnter (Collision targetObj) {
+        // if not a waypoint, skip!
+        if (targetObj.gameObject.tag != "Waypoint")
+            return;
+
         currentPos++;
 
         if (currentPos == waypoints.Count) {

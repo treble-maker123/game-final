@@ -89,6 +89,10 @@ public class SpawnPoint : MonoBehaviour {
         mob.GetComponent<FollowWaypoint>().onEndReached +=
             ground.sceneController.GetComponent<GameState>().MobReachesDestination;
 
+        Physics.IgnoreCollision(
+                mob.GetComponent<Collider>(),
+                player.GetComponent<Collider>());
+
         // Setup healthbar to have a reference of where the player is
         Healthbar hb = mob.GetComponentInChildren<Healthbar>();
             hb.player = player;
