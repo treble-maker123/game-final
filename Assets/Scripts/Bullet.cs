@@ -6,10 +6,13 @@ public class Bullet : MonoBehaviour {
 
     public float speed = 70f;
     public GameObject bulletExplosionEffect;
-    
-    public void Seek(Transform _target)
+
+    private float damage;
+
+    public void Seek(Transform _target, float dmg)
     {
         target = _target;
+        damage = dmg;
     }
 	
 	// Update is called once per frame
@@ -27,7 +30,8 @@ public class Bullet : MonoBehaviour {
         if (direction.magnitude <= distanceThisFrame)
         {
             MobInteraction mb = target.GetComponent<MobInteraction>();
-            mb.TakeDamage(5f);
+            Debug.Log(damage);
+            mb.TakeDamage(damage);
             HitTarget();
             return;
         }

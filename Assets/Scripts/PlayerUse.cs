@@ -30,6 +30,13 @@ public class PlayerUse : MonoBehaviour {
                 GameObject hitObj = hitInfo.transform.gameObject;
                 tile.Menu(hitObj);
             }
+
+            if (hitInfo.transform.name == "RegTurret(Clone)")
+            {
+                BuildMenu tile = hitInfo.transform.GetComponent<BuildMenu>();
+                GameObject hitObj = hitInfo.transform.gameObject;
+                tile.Upgrade(hitObj);
+            }
         }
     }
 }

@@ -54,8 +54,8 @@ public class TowerBuildMenu : MonoBehaviour {
 
     public void closeMenu()
     {
-        this.gameObject.SetActive(false);
         player.GetComponent<RigidbodyFirstPersonController>().enabled = true;
+        Destroy(this.gameObject);
     }
 
     public void buildReg()
@@ -67,8 +67,8 @@ public class TowerBuildMenu : MonoBehaviour {
         //Subtract Money
         scene.GetComponent<GameState>().StartingGold = scene.GetComponent<GameState>().StartingGold - 100;
 
-        this.gameObject.SetActive(false);
         player.GetComponent<RigidbodyFirstPersonController>().enabled = true;
+        Destroy(this.gameObject);
     }
 
     public void buildBomb()
@@ -80,8 +80,8 @@ public class TowerBuildMenu : MonoBehaviour {
         //Money
         scene.GetComponent<GameState>().StartingGold = scene.GetComponent<GameState>().StartingGold - 300;
 
-        this.gameObject.SetActive(false);
         player.GetComponent<RigidbodyFirstPersonController>().enabled = true;
+        Destroy(this.gameObject);
     }
 
     public void buildSlow()
@@ -93,8 +93,8 @@ public class TowerBuildMenu : MonoBehaviour {
         //Money
         scene.GetComponent<GameState>().StartingGold = scene.GetComponent<GameState>().StartingGold - 200;
 
-        this.gameObject.SetActive(false);
         player.GetComponent<RigidbodyFirstPersonController>().enabled = true;
+        Destroy(this.gameObject);
     }
 
 }
