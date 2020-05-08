@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 /**
  * GameObjects with this behavior will follow the waypoints from Ground.cs
  */
@@ -16,6 +17,12 @@ public class FollowWaypoint : MonoBehaviour {
     // this method is invoked when
     public delegate void OnEndReached();
     public event OnEndReached onEndReached;
+
+    //Slowing variables
+    public static readonly float FullSpeed = 5.0f;
+    public static readonly int OriginalDuration = 1;
+    public bool slowCheck = false;
+    private int slowCountDown;
 
     void Start () {
         currentPos = 0;
@@ -60,5 +67,30 @@ public class FollowWaypoint : MonoBehaviour {
 
             Destroy(gameObject);
         }
+    }
+
+    /**
+     * Countdown coroutine for the slowing phase.
+     */
+    IEnumerator SlowCountDown()
+    {
+        while (slowCountDown > 0)
+        {
+            slowCountDown -= 1;
+            yield return new WaitForSeconds(1.0f);
+        }
+        slowCheck = false;
+    }
+
+    public void SlowingMob(int duration, float percent)
+    {
+        Debug.Log("Slowed");
+        float newSpeed = FullSpeed * percent;
+        speed = newSpeed;
+        slowCountDown = duration;
+        IEnumerator slow = SlowCountDown();
+        StartCoroutine(slow);
+        speed = FullSpeed;
+        slowCountDown = OriginalDuration;
     }
 }
