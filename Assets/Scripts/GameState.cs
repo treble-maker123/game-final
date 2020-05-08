@@ -30,6 +30,7 @@ public class GameState : MonoBehaviour {
     public Text tipsText;
     public Text livesLeftText;
     public Text goldText;
+    public Text levelText;
     public KeyCode pauseKey;
 
     // countdown variables
@@ -44,7 +45,8 @@ public class GameState : MonoBehaviour {
     // variables for tuning the game
     public static readonly int TotalLives = 40;
     public static readonly int StartingGold = 200;
-    public static readonly int BuildTime = 2;
+    public static readonly int BuildTime = 5;
+    public static readonly int TallyTime = 5;
 
     public bool GamePaused {
         get { return gamePaused; }
@@ -64,6 +66,7 @@ public class GameState : MonoBehaviour {
         get { return level; }
         set {
             level = value;
+            levelText.text = level.ToString();
         }
     }
 
@@ -118,7 +121,7 @@ public class GameState : MonoBehaviour {
         Lives = TotalLives;
         Gold = StartingGold;
 
-        numMobsToSpawn = 10;
+        numMobsToSpawn = 1;
         mobType = SpawnPoint.MobType.skeleton;
         spawnInterval = 2.0f;
     }
@@ -160,16 +163,13 @@ public class GameState : MonoBehaviour {
                 if (building && buildCountDown <= 0) {
                     building = false;
                     stage = Stage.Spawn;
+                    spawn.ResetCounter();
                 }
 
                 break;
             case Stage.Spawn:
                 tipsHeader.text = "Enemies Spawning!";
                 tipsText.text = (numMobsToSpawn - spawn.NumSpawned) + " enemies left to spawn.";
-
-                SpawnPoint.SpawnInterval = spawnInterval;
-                SpawnPoint.NumToSpawn = numMobsToSpawn;
-                SpawnPoint.TypeToSpawn = mobType;
 
                 if (!spawning) {
                     Debug.Log("Start spawning "
@@ -194,16 +194,18 @@ public class GameState : MonoBehaviour {
 
                 if (NumMobsActive <= 0) {
                     stage = Stage.Tally;
-                    tallyCountDown = 10;
+                    tallyCountDown = TallyTime;
                     StartCoroutine("TallyCountDown");
                 }
                 break;
             case Stage.Tally:
                 tipsHeader.text = "Round Over!";
-                tipsText.text = "Get ready for the next round! " + tallyCountDown + " seconds left.";
+                tipsText.text = "Get ready for the next wave! " + tallyCountDown + " seconds left.";
 
-                if (tallyCountDown <= 0)
+                if (tallyCountDown <= 0) {
                     stage = Stage.Build;
+                    AdvanceLevel();
+                }
                 break;
             default:
                 Debug.LogError("Unrecognized stage: " + stage.ToString());
@@ -254,7 +256,6 @@ public class GameState : MonoBehaviour {
      */
     public void MobReachesDestination() {
         Lives -= 1;
-        Debug.Log("One mob reached its destination!");
     }
 
     /**

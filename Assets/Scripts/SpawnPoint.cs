@@ -14,9 +14,6 @@ public class SpawnPoint : MonoBehaviour {
     public Ground ground;
 
     public static bool GamePaused = false;
-    public static float SpawnInterval = 2.0f;
-    public static int NumToSpawn = 10;
-    public static MobType TypeToSpawn = MobType.mob1;
 
     /**
      * The number of mobs spawned in the current iteration. Call reset
@@ -61,19 +58,6 @@ public class SpawnPoint : MonoBehaviour {
         GameObject mob;
 
         switch(type) {
-            case MobType.mob1:
-                mob = Instantiate(Resources.Load("mob1")) as GameObject;
-                mob.name = "Mob";
-
-                mob.transform.position = transform.position + new Vector3(0.0f, 2.0f, 0.0f);
-
-                mob.AddComponent<Rigidbody>();
-                mob.AddComponent<SphereCollider>();
-                mob.AddComponent<SphereCollider>().radius = 0.5f;
-
-                mob.AddComponent<MobInteraction>();
-                mob.GetComponent<MobInteraction>().maxHealth = 100f;
-                break;
             case MobType.skeleton:
                 mob = Instantiate(Resources.Load("Skeletons_demo/models/DungeonSkeleton_demo")) as GameObject;
                 mob.name = "Skeleton";
@@ -144,7 +128,6 @@ public class SpawnPoint : MonoBehaviour {
     }
 
     public enum MobType {
-        mob1,
         skeleton
     }
 }
