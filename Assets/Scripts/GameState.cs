@@ -122,7 +122,7 @@ public class GameState : MonoBehaviour {
         Gold = StartingGold;
 
         numMobsToSpawn = 1;
-        mobType = SpawnPoint.MobType.skeleton;
+        mobType = SpawnPoint.MobType.stone;
         spawnInterval = 2.0f;
     }
 
@@ -231,6 +231,7 @@ public class GameState : MonoBehaviour {
     }
 
     public void DisableFPS() {
+        player.SetActive(false);
         player.GetComponent<RigidbodyFirstPersonController>().enabled = false;
         player.GetComponent<Rigidbody>().useGravity = false;
         Cursor.visible = true;
@@ -238,6 +239,7 @@ public class GameState : MonoBehaviour {
     }
 
     public void EnableFPS() {
+        player.SetActive(true);
         player.GetComponent<RigidbodyFirstPersonController>().enabled = true;
         player.GetComponent<Rigidbody>().useGravity = true;
         Cursor.visible = false;
