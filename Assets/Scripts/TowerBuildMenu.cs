@@ -16,7 +16,7 @@ public class TowerBuildMenu : MonoBehaviour {
     void Start()
     {
         scene = GameObject.FindGameObjectWithTag("SC");
-        totalMoney = scene.GetComponent<GameState>().StartingGold;
+        totalMoney = scene.GetComponent<GameState>().Gold;
         //Get FPS Controller and Disable the Player
         player = GameObject.Find("Player");
         player.GetComponent<RigidbodyFirstPersonController>().enabled = false;
@@ -65,7 +65,7 @@ public class TowerBuildMenu : MonoBehaviour {
         Instantiate(tur, buildable.transform.position + new Vector3(0f, 0.5f, 0), buildable.transform.rotation);
         buildable.name = "Tile";
         //Subtract Money
-        scene.GetComponent<GameState>().StartingGold = scene.GetComponent<GameState>().StartingGold - 100;
+        scene.GetComponent<GameState>().Gold = scene.GetComponent<GameState>().Gold - 100;
 
         player.GetComponent<RigidbodyFirstPersonController>().enabled = true;
         Destroy(this.gameObject);
@@ -78,7 +78,7 @@ public class TowerBuildMenu : MonoBehaviour {
         Instantiate(tur, buildable.transform.position + new Vector3(0f, 0.5f, 0), buildable.transform.rotation);
         buildable.name = "Tile";
         //Money
-        scene.GetComponent<GameState>().StartingGold = scene.GetComponent<GameState>().StartingGold - 300;
+        scene.GetComponent<GameState>().Gold = scene.GetComponent<GameState>().Gold - 300;
 
         player.GetComponent<RigidbodyFirstPersonController>().enabled = true;
         Destroy(this.gameObject);
@@ -91,7 +91,7 @@ public class TowerBuildMenu : MonoBehaviour {
         Instantiate(tur, buildable.transform.position + new Vector3(0f, 0.5f, 0), buildable.transform.rotation);
         buildable.name = "Tile";
         //Money
-        scene.GetComponent<GameState>().StartingGold = scene.GetComponent<GameState>().StartingGold - 200;
+        scene.GetComponent<GameState>().Gold = scene.GetComponent<GameState>().Gold - 200;
 
         player.GetComponent<RigidbodyFirstPersonController>().enabled = true;
         Destroy(this.gameObject);

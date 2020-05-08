@@ -24,6 +24,7 @@ public class GameState : MonoBehaviour {
     public Text tipsHeader;
     public Text tipsText;
     public Text livesLeftText;
+    public Text goldText;
     public KeyCode pauseKey;
 
     // variables related to building
@@ -71,7 +72,16 @@ public class GameState : MonoBehaviour {
 
     public int Gold {
         get { return gold; }
-        set { gold = value; }
+        set {
+            gold = value;
+            goldText.text = gold.ToString();
+
+            if (gold > 0) {
+                goldText.color = new Color(0.0f, 0.5f, 0.0f);
+            } else {
+                goldText.color = new Color(0.5f, 0.0f, 0.0f);
+            }
+        }
     }
 
     public Stage CurrentStage {

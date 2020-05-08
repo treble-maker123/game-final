@@ -201,8 +201,6 @@ public class Ground : MonoBehaviour {
                     if (neighbor.tag.Contains("Terrain")) {
                         neighbor.GetComponent<Tile>().IsBuildable = true;
 
-                        neighbor.GetComponent<Renderer>().material.mainTexture =
-                            Resources.Load<Texture2D>("Environment/TerrainAssets/SurfaceTextures/MudRockyAlbedoSpecular");
                     }
                 }
             }

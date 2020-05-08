@@ -24,7 +24,7 @@ public class TurretUpgrade : MonoBehaviour {
     void Start () {
         this.gameObject.SetActive(true);
         scene = GameObject.FindGameObjectWithTag("SC");
-        money = scene.GetComponent<GameState>().StartingGold;
+        money = scene.GetComponent<GameState>().Gold;
 
         //Get Cost Values
         initCosts();
@@ -52,7 +52,7 @@ public class TurretUpgrade : MonoBehaviour {
         turretVals.dmg = turretVals.dmg * 2;
         //Subtract Money
         money = money - cost;
-        scene.GetComponent<GameState>().StartingGold = money;
+        scene.GetComponent<GameState>().Gold = money;
     }
 
     public void rangeUpgrade()
@@ -69,7 +69,7 @@ public class TurretUpgrade : MonoBehaviour {
         turretVals.range = turretVals.range * 2;
         //Subtract Money
         money = money - cost;
-        scene.GetComponent<GameState>().StartingGold = money;
+        scene.GetComponent<GameState>().Gold = money;
     }
 
     public void fireUpgrade()
@@ -86,7 +86,7 @@ public class TurretUpgrade : MonoBehaviour {
         turretVals.fireRate = turretVals.fireRate * 2;
         //Subtract money
         money = money - cost;
-        scene.GetComponent<GameState>().StartingGold = money;
+        scene.GetComponent<GameState>().Gold = money;
     }
 
     public void closeMenu()
@@ -95,7 +95,7 @@ public class TurretUpgrade : MonoBehaviour {
         player.GetComponent<RigidbodyFirstPersonController>().enabled = true;
         Destroy(this.gameObject);
     }
-    
+
     void buttonCheck()
     {
         if (money < upg1Cost) { upgradeDamage.interactable = false; upgradeDamage.GetComponentInChildren<Text>().color = Color.red; }
