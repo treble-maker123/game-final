@@ -38,14 +38,13 @@ public class Ground : MonoBehaviour {
     void Start () {
         AssertCorrectConfiguration();
         InitializeVariables();
-        PositionCameraForArialView();
 
-        currentGrid.GeneratePath(GameState.Difficulty.easy);
-        DrawTiles();
+        PositionCameraForArialView();
     }
 
-    void Update () {
-
+    public void GenerateMaze(GameState.Difficulty difficulty) {
+        currentGrid.GeneratePath(difficulty);
+        DrawTiles();
     }
 
     /**
@@ -79,7 +78,7 @@ public class Ground : MonoBehaviour {
     /**
      * Generate all of GameObjects from currentGrid.
      */
-    public void DrawTiles() {
+    private void DrawTiles() {
         Grid grid = currentGrid;
         tiles = new GameObject[grid.Width,grid.Length];
         List<Grid.Position> waypoints = grid.Waypoints;

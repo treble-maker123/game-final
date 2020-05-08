@@ -28,6 +28,7 @@ public class SpawnPoint : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        ResetCounter();
         GameObject[] rootObjects = gameObject.scene.GetRootGameObjects();
 
         for (int i = 0; i < rootObjects.Length; i++) {
