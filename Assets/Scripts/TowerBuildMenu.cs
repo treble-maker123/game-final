@@ -74,7 +74,7 @@ public class TowerBuildMenu : MonoBehaviour {
     public void buildBomb()
     {
         var buildable = BuildMenu.buildLoc;
-        Object tur = Resources.Load("BombTurret");
+        Object tur = Resources.Load("AirTurret");
         Instantiate(tur, buildable.transform.position + new Vector3(0f, 0.5f, 0), buildable.transform.rotation);
         buildable.name = "Tile";
         //Money

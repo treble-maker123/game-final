@@ -21,6 +21,7 @@ public class Turret : MonoBehaviour {
     [Header("Unity Setup")]
 
     public string enemyTag = "Mobs";
+    public string enemyType;
     public Transform partToRotate;
     private float turnSpeed = 10f;
 
@@ -42,11 +43,14 @@ public class Turret : MonoBehaviour {
 
         foreach(GameObject enemy in enemies)
         {
-            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy < shortestDistance)
+            if (enemy.name == enemyType)
             {
-                shortestDistance = distanceToEnemy;
-                nearestEnemy = enemy;
+                float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+                if (distanceToEnemy < shortestDistance)
+                {
+                    shortestDistance = distanceToEnemy;
+                    nearestEnemy = enemy;
+                }
             }
         }
 
