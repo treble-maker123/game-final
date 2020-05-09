@@ -319,9 +319,9 @@ MonoBehaviour:
   dmg: 5
   range: 15
   fireRate: 1
-  dmgCost: 100
-  rngCost: 100
-  frCost: 100
+  dmgCost: 300
+  rngCost: 300
+  frCost: 300
   enemyTag: Mobs
   enemyType: Air
   partToRotate: {fileID: 4884993277221492}

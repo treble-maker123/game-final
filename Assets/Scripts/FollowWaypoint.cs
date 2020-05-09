@@ -100,9 +100,12 @@ public class FollowWaypoint : MonoBehaviour {
     {
         //Debug.Log("Slowed");
         float newSpeed = FullSpeed * percent;
-        speed = newSpeed;
-        slowCountDown = duration;
-        IEnumerator slow = SlowCountDown();
-        StartCoroutine(slow);
+        if (newSpeed < speed)
+        {
+            speed = newSpeed;
+            slowCountDown = duration;
+            IEnumerator slow = SlowCountDown();
+            StartCoroutine(slow);
+        }
     }
 }

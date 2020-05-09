@@ -291,9 +291,9 @@ MonoBehaviour:
   duration: 1
   percentage: 0.8
   fireRate: 3
-  rngCost: 100
-  durCost: 100
-  perCost: 100
+  rngCost: 300
+  durCost: 300
+  perCost: 300
   enemyTag: Mobs
 --- !u!114 &114631215289019414
 MonoBehaviour:

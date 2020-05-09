@@ -17,9 +17,9 @@ public class SlowTurret : MonoBehaviour
     private float fireCountdown = 0f;
     public float fireRate = 3f;
 
-    public int rngCost = 100;
-    public int durCost = 100;
-    public int perCost = 100;
+    public int rngCost = 300;
+    public int durCost = 300;
+    public int perCost = 300;
 
     [Header("Unity Setup")]
 
