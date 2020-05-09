@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 114794943555755784}
   m_Layer: 5
   m_Name: UGMenu
-  m_TagString: Untagged
+  m_TagString: Upgrade
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -22,7 +22,8 @@ public class SlowGun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0) && Time.time > nextShot)
+        GameObject[] upgMenu = GameObject.FindGameObjectsWithTag("Upgrade");
+        if (Input.GetMouseButton(0) && Time.time > nextShot && upgMenu.Length < 1)
         {
             nextShot = Time.time + fireRate;
             Shoot();

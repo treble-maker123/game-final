@@ -20,7 +20,8 @@ public class Pistol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        GameObject[] upgMenu = GameObject.FindGameObjectsWithTag("Upgrade");
+        if (Input.GetMouseButtonDown(0) && upgMenu.Length < 1)
         {
             Shoot();
         }
