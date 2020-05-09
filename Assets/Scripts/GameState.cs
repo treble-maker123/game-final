@@ -37,16 +37,13 @@ public class GameState : MonoBehaviour {
     private int buildCountDown;
     private int tallyCountDown;
 
-    // variables related to spawning mobs
-    public int numMobsToSpawn;
-    public float spawnInterval;
-    public SpawnPoint.MobType mobType;
-
     // variables for tuning the game
     public static readonly int TotalLives = 40;
     public static readonly int StartingGold = 200;
-    public static readonly int BuildTime = 5;
-    public static readonly int TallyTime = 5;
+    public static readonly int BuildTime = 2;
+    public static readonly int TallyTime = 2;
+    public static readonly int MobsPerWave = 1;
+    public static readonly float MobSpawnInterval = 2.0f;
 
     public bool GamePaused {
         get { return gamePaused; }
@@ -120,10 +117,6 @@ public class GameState : MonoBehaviour {
         Level = 1;
         Lives = TotalLives;
         Gold = StartingGold;
-
-        numMobsToSpawn = 1;
-        mobType = SpawnPoint.MobType.orc;
-        spawnInterval = 2.0f;
     }
 
     void Start () {
@@ -169,21 +162,16 @@ public class GameState : MonoBehaviour {
                 break;
             case Stage.Spawn:
                 tipsHeader.text = "Enemies Spawning!";
-                tipsText.text = (numMobsToSpawn - spawn.NumSpawned) + " enemies left to spawn.";
+                tipsText.text = (MobsPerWave - spawn.NumSpawned) + " enemies left to spawn.";
 
                 if (!spawning) {
-                    Debug.Log("Start spawning "
-                            + numMobsToSpawn + " mobs of type "
-                            + mobType.ToString() + " with an interval of "
-                            + spawnInterval + " seconds.");
-                    IEnumerator spawnCoroutine = spawn.StartSpawn(numMobsToSpawn,
-                                                                    mobType,
-                                                                    spawnInterval);
+                    SpawnPoint.MobType type = (SpawnPoint.MobType) Random.Range(0, (int) SpawnPoint.MobType.count);
+                    IEnumerator spawnCoroutine = spawn.StartSpawn(MobsPerWave, type, MobSpawnInterval);
                     StartCoroutine(spawnCoroutine);
                     spawning = true;
                 }
 
-                if (spawning && spawn.NumSpawned >= numMobsToSpawn) {
+                if (spawning && spawn.NumSpawned >= MobsPerWave) {
                     spawning = false;
                     stage = Stage.Battle;
                 }

@@ -174,6 +174,7 @@ public class SpawnPoint : MonoBehaviour {
     public enum MobType {
         skeleton,
         stone,
-        orc
+        orc,
+        count
     }
 }
