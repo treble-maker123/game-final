@@ -12,6 +12,14 @@ public class Gun : MonoBehaviour
 
     public Camera fpsCamera;
 
+    public AudioClip shotClip;
+
+    private AudioSource source;
+
+    void Start() {
+        source = GetComponent<AudioSource>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -25,10 +33,11 @@ public class Gun : MonoBehaviour
     void Shoot()
     {
         muzzleFlash.Play();
+        source.PlayOneShot(shotClip, 0.3f);
 
         RaycastHit hitInfo;
 
-        Vector3 adj = new Vector3(Random.RandomRange(-0.8f, 0.8f), Random.RandomRange(-0.8f, 0.8f));
+        Vector3 adj = new Vector3(UnityEngine.Random.Range(-0.8f, 0.8f), UnityEngine.Random.Range(-0.8f, 0.8f));
         if (Physics.Raycast(fpsCamera.transform.position + adj, fpsCamera.transform.forward, out hitInfo, range))
         {
             //var e = Resources.Load("HitSpot");
