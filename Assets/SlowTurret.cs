@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SlowTurret : MonoBehaviour
 {
+    public static bool GamePaused = false;
 
     private Transform target;
     private GameObject targetEnemy;
