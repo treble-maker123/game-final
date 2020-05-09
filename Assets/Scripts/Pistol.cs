@@ -10,6 +10,13 @@ public class Pistol : MonoBehaviour
 
     public Camera fpsCamera;
 
+    public AudioClip shotClip;
+    private AudioSource source;
+
+    void Start() {
+        source = GetComponent<AudioSource>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -22,6 +29,7 @@ public class Pistol : MonoBehaviour
     void Shoot()
     {
         muzzleFlash.Play();
+        source.PlayOneShot(shotClip);
 
         RaycastHit hitInfo;
 

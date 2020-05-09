@@ -33,7 +33,7 @@ public class Gun : MonoBehaviour
     void Shoot()
     {
         muzzleFlash.Play();
-        source.PlayOneShot(shotClip, 0.3f);
+        source.PlayOneShot(shotClip);
 
         RaycastHit hitInfo;
 
