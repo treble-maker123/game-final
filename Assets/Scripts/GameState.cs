@@ -52,6 +52,7 @@ public class GameState : MonoBehaviour {
     public static readonly int MobsPerWave = 1;
     public static readonly float MobSpawnInterval = 2.0f;
     public static readonly float MobStartingHealth = 100f;
+    public static readonly float mobMultiplier = 1.2f;
 
     private int score;
 
@@ -202,19 +203,21 @@ public class GameState : MonoBehaviour {
                             UnityEngine.Random.Range(0, (int) SpawnPoint.MobType.count);
 
                     float health = MobStartingHealth;
-                    switch(difficulty) {
+                    switch (difficulty) {
                         case Difficulty.easy:
-                            health *= (float) Math.Pow(1.05f, Level);
+                            health *= (float) Math.Pow(1.3f, Level);
                             break;
                         case Difficulty.medium:
-                            health *= (float) Math.Pow(1.10f, Level);
+                            health *= (float) Math.Pow(1.6f, Level);
                             break;
                         case Difficulty.hard:
-                            health *= (float) Math.Pow(1.15f, Level);
+                            health *= (float) Math.Pow(2.0f, Level);
                             break;
                     }
 
-                    IEnumerator spawnCoroutine = spawn.StartSpawn(MobsPerWave, type, MobSpawnInterval, MobStartingHealth);
+                    float totalMobs = MobsPerWave * (float)Math.Pow(mobMultiplier, Level);
+                    int mobCount = (int) totalMobs;
+                    IEnumerator spawnCoroutine = spawn.StartSpawn(mobCount, type, MobSpawnInterval, MobStartingHealth);
                     StartCoroutine(spawnCoroutine);
                     spawning = true;
                 }

@@ -16,9 +16,9 @@ public class Turret : MonoBehaviour {
     public float fireRate = 3f;
     private float fireCountdown = 0f;
 
-    public int dmgCost = 100;
-    public int rngCost = 100;
-    public int frCost = 100;
+    public int dmgCost = 300;
+    public int rngCost = 300;
+    public int frCost = 300;
 
     [Header("Unity Setup")]
 
