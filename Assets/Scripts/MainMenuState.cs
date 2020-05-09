@@ -51,6 +51,10 @@ public class MainMenuState : MonoBehaviour {
         };
         AudioSource source = mainCamera.GetComponent<AudioSource>();
         source.PlayOneShot(backgroundClip);
+
+        if (PlayerPrefs.GetString("showSB") == "true") {
+            currentState = MenuState.scoreboard;
+        }
     }
 
     void Update () {
@@ -82,6 +86,13 @@ public class MainMenuState : MonoBehaviour {
                 instructionPanel.SetActive(true);
                 break;
             case MenuState.scoreboard:
+                 if (PlayerPrefs.GetString("showSB") == "true") {
+                    int score = PlayerPrefs.GetInt("score");
+                    string name= PlayerPrefs.GetString("name");
+                    UpdateScoreBoard(score, name);
+                    PlayerPrefs.SetString("showSB", "false");
+                }
+
                 scoreboardPanel.SetActive(true);
                 break;
             case MenuState.credits:

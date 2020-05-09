@@ -25,6 +25,7 @@ public class GameState : MonoBehaviour {
     public GameObject gameMenuPanel;
     public GameObject difficultyPanel;
     public GameObject tipsPanel;
+    public GameObject scoreBoardInputPanel;
     public GameObject gameOverlay;
     public GameObject mobGroup;
     public GameObject player;
@@ -33,7 +34,11 @@ public class GameState : MonoBehaviour {
     public Text livesLeftText;
     public Text goldText;
     public Text levelText;
+    public Text scoreText;
     public KeyCode pauseKey;
+
+    public InputField playerName;
+    public Button scoreBoardSubmit;
 
     // countdown variables
     private int buildCountDown;
@@ -47,6 +52,8 @@ public class GameState : MonoBehaviour {
     public static readonly int MobsPerWave = 1;
     public static readonly float MobSpawnInterval = 2.0f;
     public static readonly float MobStartingHealth = 100f;
+
+    private int score;
 
     public bool GamePaused {
         get { return gamePaused; }
@@ -73,6 +80,14 @@ public class GameState : MonoBehaviour {
         set {
             level = value;
             levelText.text = level.ToString();
+        }
+    }
+
+    public int Score {
+        get { return score; }
+        set {
+            score = value;
+            scoreText.text = score.ToString();
         }
     }
 
@@ -123,6 +138,7 @@ public class GameState : MonoBehaviour {
         spawning = false;
         building = false;
 
+        Score = 0;
         Level = 1;
         Lives = TotalLives;
         Gold = StartingGold;
@@ -140,9 +156,10 @@ public class GameState : MonoBehaviour {
             GamePaused = !GamePaused;
         }
 
+        scoreBoardSubmit.enabled = !string.IsNullOrEmpty(playerName.text);
 
-        if (GamePaused) {
-            // TODO: Stop updating
+        if (lives <= 0) {
+            stage = Stage.GameOver;
         }
 
         switch(stage) {
@@ -150,6 +167,7 @@ public class GameState : MonoBehaviour {
                 gameMenuPanel.SetActive(false);
                 gameOverlay.SetActive(false);
                 tipsPanel.SetActive(false);
+                scoreBoardInputPanel.SetActive(false);
                 difficultyPanel.SetActive(true);
                 arialView.enabled = false;
                 player.GetComponent<PlayerUse>().WeaponSwap(0);
@@ -225,6 +243,21 @@ public class GameState : MonoBehaviour {
                     stage = Stage.Build;
                 }
                 break;
+            case Stage.GameOver:
+                tipsHeader.text = "Game Over!";
+                tipsText.text = "";
+
+                // TODO: Calculate score
+                Score = 5;
+
+                gameMenuPanel.SetActive(false);
+                gameOverlay.SetActive(false);
+                tipsPanel.SetActive(false);
+                scoreBoardInputPanel.SetActive(true);
+                difficultyPanel.SetActive(false);
+
+                DisableFPS();
+                break;
             default:
                 Debug.LogError("Unrecognized stage: " + stage.ToString());
                 break;
@@ -291,6 +324,14 @@ public class GameState : MonoBehaviour {
         GamePaused = false;
     }
 
+    public void SubmitScore() {
+        PlayerPrefs.SetInt("score", Score);
+        PlayerPrefs.SetString("name", playerName.text);
+        PlayerPrefs.SetString("showSB", "true");
+
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+    }
+
     public void SetEasy() {
         difficulty = Difficulty.easy;
         SetDifficulty();
@@ -316,6 +357,7 @@ public class GameState : MonoBehaviour {
         tipsPanel.SetActive(true);
         gameOverlay.SetActive(true);
         gameMenuPanel.SetActive(false);
+        scoreBoardInputPanel.SetActive(false);
 
         player.transform.position = new Vector3(10f, 1.3f, 10f);
         EnableFPS();
@@ -342,6 +384,7 @@ public class GameState : MonoBehaviour {
         Build, // a window where the players can build towers
         Spawn, // mobs spawn during this time
         Battle, // this is between the end of spawning and when the last mob reaches destination
-        Tally // points are tallied during this time
+        Tally, // points are tallied during this timi
+        GameOver
     }
 }
