@@ -26,8 +26,9 @@ public class MainMenuState : MonoBehaviour {
     private static readonly string fileName = "score.txt";
     private static readonly int numPlayers = 5;
 
-    private const string gameActionSceneName = "GameAction";
-    private const string trainingGroundSceneName = "TrainingGround";
+    public static readonly string gameActionSceneName = "GameAction";
+    public static readonly string trainingGroundSceneName = "TrainingGround";
+    public static readonly string tutorialSceneName = "Tutorial";
 
     private MenuState currentState;
     private List<GameObject> allPanels;
@@ -179,7 +180,8 @@ public class MainMenuState : MonoBehaviour {
      */
     public void ShowInstruction() {
         Debug.Log("Showing instruction menu!");
-        currentState = MenuState.instruction;
+        // currentState = MenuState.instruction;
+        SceneManager.LoadScene(tutorialSceneName, LoadSceneMode.Single);
     }
 
     /**
