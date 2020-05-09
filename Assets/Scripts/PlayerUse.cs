@@ -92,8 +92,8 @@ public class PlayerUse : MonoBehaviour {
 
     void FetchIcons() {
         Texture2D rifleIcon = AssetPreview.GetAssetPreview(Resources.Load("Guns/Rifle"));
-        Texture2D pistolIcon = AssetPreview.GetAssetPreview(Resources.Load("Guns/Pistol"));
-        Texture2D heavyIcon = AssetPreview.GetAssetPreview(Resources.Load("Guns/Heavy"));
+        Texture2D pistolIcon = AssetPreview.GetAssetPreview(Resources.Load("Guns/Preview/PistolPrev"));
+        Texture2D heavyIcon = AssetPreview.GetAssetPreview(Resources.Load("Guns/Preview/HeavyPrev"));
 
         rifle.texture = rifleIcon;
         pistol.texture = pistolIcon;
