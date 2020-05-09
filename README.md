@@ -6,7 +6,7 @@ Unity Version: 2017.4.36f1
 
 This repository contains final project for CMPSCI590G Game Programming at University of Massachuetts, Amherst and is hosted on [GitHub](https://github.com/treble-maker123/game-final).
 
-All scripts in `Assets/Scripts` are written by us, all gun prefabs come from [DevAssets](devassets.com) and all other prefabs come from the Unity Asset Store.
+All scripts in `Assets/Scripts` are written by us, all gun prefabs come from [DevAssets](devassets.com), all audio clips are from [FreeSound](freesound.org) and all other prefabs come from the Unity Asset Store.
 
 ## Game Description
 
