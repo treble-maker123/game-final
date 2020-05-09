@@ -316,7 +316,7 @@ public class GameState : MonoBehaviour {
         gameOverlay.SetActive(true);
         gameMenuPanel.SetActive(false);
 
-        player.transform.position = new Vector3(10f, 0f, 10f);
+        player.transform.position = new Vector3(10f, 1.3f, 10f);
         EnableFPS();
     }
 

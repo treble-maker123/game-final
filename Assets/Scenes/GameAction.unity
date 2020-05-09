@@ -679,7 +679,7 @@ MonoBehaviour:
   topLeftMostZ: 0
   arialCameraHeight: 70
   sceneController: {fileID: 1556268067}
-  player: {fileID: 2031182694}
+  player: {fileID: 1691150329}
   arialViewCamera: {fileID: 2108116107}
 --- !u!1001 &537262548
 Prefab:
@@ -742,6 +742,47 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1996978118129354, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4327581200453228, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114058521716011876, guid: 75a3187c48ddd5a48b80146d2b7618fc,
+        type: 2}
+      propertyPath: rifle
+      value: 
+      objectReference: {fileID: 937460808}
+    - target: {fileID: 114058521716011876, guid: 75a3187c48ddd5a48b80146d2b7618fc,
+        type: 2}
+      propertyPath: pistol
+      value: 
+      objectReference: {fileID: 341644055}
+    - target: {fileID: 114058521716011876, guid: 75a3187c48ddd5a48b80146d2b7618fc,
+        type: 2}
+      propertyPath: heavy
+      value: 
+      objectReference: {fileID: 1939898084}
+    - target: {fileID: 4327581200453228, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 54976303191761504, guid: 75a3187c48ddd5a48b80146d2b7618fc,
+        type: 2}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4327581200453228, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4327581200453228, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 224031166655657948, guid: 75a3187c48ddd5a48b80146d2b7618fc,
+        type: 2}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2320,7 +2361,7 @@ MonoBehaviour:
   tipsPanel: {fileID: 910605873}
   gameOverlay: {fileID: 1363377492}
   mobGroup: {fileID: 346406723}
-  player: {fileID: 2031182694}
+  player: {fileID: 1691150329}
   tipsHeader: {fileID: 1170388418}
   tipsText: {fileID: 1251550405}
   livesLeftText: {fileID: 1857533854}
@@ -2401,6 +2442,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1592801180}
+--- !u!1 &1691150329 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1114886652620580, guid: 75a3187c48ddd5a48b80146d2b7618fc,
+    type: 2}
+  m_PrefabInternal: {fileID: 537262548}
 --- !u!1 &1749840835
 GameObject:
   m_ObjectHideFlags: 0
@@ -2946,11 +2992,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1981210338}
---- !u!1 &2031182694 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1996978118129354, guid: 75a3187c48ddd5a48b80146d2b7618fc,
-    type: 2}
-  m_PrefabInternal: {fileID: 537262548}
 --- !u!1 &2038618217
 GameObject:
   m_ObjectHideFlags: 0
