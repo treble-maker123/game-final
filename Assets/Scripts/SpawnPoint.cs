@@ -43,12 +43,12 @@ public class SpawnPoint : MonoBehaviour {
     /**
      * For coroutines to start spawning mobs.
      */
-    public IEnumerator StartSpawn(int numToSpawn, MobType type, float interval) {
+    public IEnumerator StartSpawn(int numToSpawn, MobType type, float interval, float health) {
         while (!SpawnPoint.GamePaused && numSpawned < numToSpawn) {
             if (GamePaused) {
                 yield return new WaitForSeconds(0.1f);
             } else {
-                SpawnMob(type);
+                SpawnMob(type, health);
                 numSpawned++;
                 yield return new WaitForSeconds(interval);
             }
@@ -58,7 +58,7 @@ public class SpawnPoint : MonoBehaviour {
     /**
      * This method will spawn a mob of the specific type on the tile.
      */
-    public void SpawnMob(MobType type) {
+    public void SpawnMob(MobType type, float health) {
         GameObject mob;
         AnimationClip walkClip;
 
@@ -163,7 +163,7 @@ public class SpawnPoint : MonoBehaviour {
 
         // Setting up mob interaction
         mob.AddComponent<MobInteraction>();
-        mob.GetComponent<MobInteraction>().maxHealth = 100f;
+        mob.GetComponent<MobInteraction>().maxHealth = health;
 
         mob.SetActive(true);
     }

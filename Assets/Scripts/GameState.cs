@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using UnityStandardAssets.Characters.FirstPerson;
+using System;
 /**
  * This class is attached to the GameAction scene's controller to handle various aspects
  * of the game.
@@ -14,7 +14,7 @@ public class GameState : MonoBehaviour {
     private int lives;
     private int gold;
     private Stage stage;
-    private Difficulty mazeDifficulty;
+    private Difficulty difficulty;
     private SpawnPoint spawn;
 
     private bool building;
@@ -45,6 +45,7 @@ public class GameState : MonoBehaviour {
     public static readonly int TallyTime = 2;
     public static readonly int MobsPerWave = 1;
     public static readonly float MobSpawnInterval = 2.0f;
+    public static readonly float MobStartingHealth = 100f;
 
     public bool GamePaused {
         get { return gamePaused; }
@@ -171,8 +172,24 @@ public class GameState : MonoBehaviour {
                 tipsText.text = (MobsPerWave - spawn.NumSpawned) + " enemies left to spawn.";
 
                 if (!spawning) {
-                    SpawnPoint.MobType type = (SpawnPoint.MobType) Random.Range(0, (int) SpawnPoint.MobType.count);
-                    IEnumerator spawnCoroutine = spawn.StartSpawn(MobsPerWave, type, MobSpawnInterval);
+                    SpawnPoint.MobType type =
+                        (SpawnPoint.MobType)
+                            UnityEngine.Random.Range(0, (int) SpawnPoint.MobType.count);
+
+                    float health = MobStartingHealth;
+                    switch(difficulty) {
+                        case Difficulty.easy:
+                            health *= (float) Math.Pow(1.05f, Level);
+                            break;
+                        case Difficulty.medium:
+                            health *= (float) Math.Pow(1.10f, Level);
+                            break;
+                        case Difficulty.hard:
+                            health *= (float) Math.Pow(1.15f, Level);
+                            break;
+                    }
+
+                    IEnumerator spawnCoroutine = spawn.StartSpawn(MobsPerWave, type, MobSpawnInterval, MobStartingHealth);
                     StartCoroutine(spawnCoroutine);
                     spawning = true;
                 }
@@ -266,22 +283,22 @@ public class GameState : MonoBehaviour {
     }
 
     public void SetEasy() {
-        mazeDifficulty = Difficulty.easy;
+        difficulty = Difficulty.easy;
         SetDifficulty();
     }
 
     public void SetMedium() {
-        mazeDifficulty = Difficulty.medium;
+        difficulty = Difficulty.medium;
         SetDifficulty();
     }
 
     public void SetHard() {
-        mazeDifficulty = Difficulty.hard;
+        difficulty = Difficulty.hard;
         SetDifficulty();
     }
 
     private void SetDifficulty() {
-        ground.GetComponent<Ground>().GenerateMaze(mazeDifficulty);
+        ground.GetComponent<Ground>().GenerateMaze(difficulty);
         spawn = ground.GetComponentInChildren<SpawnPoint>();
         stage = Stage.Build;
         buildCountDown = BuildTime;
