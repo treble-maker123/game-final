@@ -53,7 +53,9 @@ public class GameState : MonoBehaviour {
     public static readonly float MobSpawnInterval = 2.0f;
     public static readonly float MobStartingHealth = 100f;
 
+    // game stats;
     private int score;
+    private int mobsKilled;
 
     public bool GamePaused {
         get { return gamePaused; }
@@ -121,6 +123,10 @@ public class GameState : MonoBehaviour {
         }
     }
 
+    public int MobsKilled {
+        get { return mobsKilled; }
+    }
+
     public Stage CurrentStage {
         get { return stage; }
     }
@@ -142,6 +148,8 @@ public class GameState : MonoBehaviour {
         Level = 1;
         Lives = TotalLives;
         Gold = StartingGold;
+
+        mobsKilled = 0;
     }
 
     void Start () {
@@ -207,6 +215,7 @@ public class GameState : MonoBehaviour {
                             health *= (float) Math.Pow(1.05f, Level);
                             break;
                         case Difficulty.medium:
+        Debug.Log("Mob killed!");
                             health *= (float) Math.Pow(1.10f, Level);
                             break;
                         case Difficulty.hard:
@@ -248,7 +257,7 @@ public class GameState : MonoBehaviour {
                 tipsText.text = "";
 
                 // TODO: Calculate score
-                Score = 5;
+                Score = CalculateScore(difficulty, MobsKilled, Level);
 
                 gameMenuPanel.SetActive(false);
                 gameOverlay.SetActive(false);
@@ -262,6 +271,24 @@ public class GameState : MonoBehaviour {
                 Debug.LogError("Unrecognized stage: " + stage.ToString());
                 break;
         }
+    }
+
+    int CalculateScore(Difficulty d, int numMobsKilled, int finalLevel) {
+        float score = numMobsKilled + 10 * finalLevel;
+
+        switch (d) {
+            case Difficulty.easy:
+                score *= 1.0f;
+                break;
+            case Difficulty.medium:
+                score *= 1.4f;
+                break;
+            case Difficulty.hard:
+                score *= 1.8f;
+                break;
+        }
+
+        return (int) score;
     }
 
     /**
@@ -315,6 +342,13 @@ public class GameState : MonoBehaviour {
      */
     public void MobReachesDestination() {
         Lives -= 1;
+    }
+
+    /**
+     * This method is called when a mob is killed.
+     */
+    public void MobKilled() {
+        mobsKilled += 1;
     }
 
     /**

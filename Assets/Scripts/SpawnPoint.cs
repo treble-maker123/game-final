@@ -164,6 +164,8 @@ public class SpawnPoint : MonoBehaviour {
         // Setting up mob interaction
         mob.AddComponent<MobInteraction>();
         mob.GetComponent<MobInteraction>().maxHealth = health;
+        mob.GetComponent<MobInteraction>().onMobKilled +=
+           ground.sceneController.GetComponent<GameState>().MobKilled;
 
         mob.SetActive(true);
     }
