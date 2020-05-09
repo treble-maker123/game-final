@@ -130,11 +130,21 @@ public class Ground : MonoBehaviour {
                         startTile = tile;
                         tile.name = "Start-" + x + "," + z;
                         tile.tag = "StartTile";
-                        tile.GetComponent<Renderer>().material.color = new Color(0.0f, 0.5f, 0.0f);
+
+                        GameObject portal =
+                            Instantiate(Resources.Load("Portal/Orbs/Prefabs/Portal")) as GameObject;
+                        portal.name = "Portal";
+                        portal.transform.parent = tile.transform;
+                        portal.transform.localScale = new Vector3(2f, 2f, 2f);
+                        portal.transform.localPosition = new Vector3(0f, 2.5f, 0f);
+                        portal.transform.Rotate(new Vector3(0f, 0f, 90f));
 
                         tile.AddComponent<SpawnPoint>();
                         tile.GetComponent<SpawnPoint>().ground = this;
                         tile.GetComponent<SpawnPoint>().player = player;
+
+                        tile.GetComponent<Renderer>().material.mainTexture =
+                            Resources.Load<Texture2D>(PathTexture);
                         break;
                     case Grid.TileType.end:
                         tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
