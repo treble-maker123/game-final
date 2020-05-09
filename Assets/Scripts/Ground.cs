@@ -141,7 +141,19 @@ public class Ground : MonoBehaviour {
                         endTile = tile;
                         tile.name = "End-" + x + "," + z;
                         tile.tag = "EndTile";
-                        tile.GetComponent<Renderer>().material.color = new Color(0.5f, 0.0f, 0.0f);
+
+                        GameObject house =
+                            Instantiate(Resources.Load("Baker House/Prefabs/Baker_house")) as GameObject;
+                        house.name = "Lorham";
+                        house.transform.parent = tile.transform;
+                        house.transform.localScale = new Vector3(0.1f, 0.1f, 0.4f);
+                        house.transform.localPosition = new Vector3(0f, 0.5f, 0f);
+                        house.transform.Rotate(new Vector3(-90f, 0f, 0f));
+
+                        house.SetActive(true);
+
+                        tile.GetComponent<Renderer>().material.mainTexture =
+                            Resources.Load<Texture2D>(PathTexture);
                         break;
                     case Grid.TileType.border:
                         tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
