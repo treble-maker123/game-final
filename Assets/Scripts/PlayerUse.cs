@@ -37,6 +37,13 @@ public class PlayerUse : MonoBehaviour {
                 GameObject hitObj = hitInfo.transform.gameObject;
                 tile.Upgrade(hitObj);
             }
+
+            if (hitInfo.transform.name == "SlowTurret(Clone)")
+            {
+                BuildMenu tile = hitInfo.transform.GetComponent<BuildMenu>();
+                GameObject hitObj = hitInfo.transform.gameObject;
+                tile.UpgradeSlow(hitObj);
+            }
         }
     }
 }

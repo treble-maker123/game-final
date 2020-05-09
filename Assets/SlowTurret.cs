@@ -12,7 +12,7 @@ public class SlowTurret : MonoBehaviour
 
     public float range = 15f;
     public int duration = 10;
-    public float percentage;
+    public float percentage = 0.8f;
     private float fireCountdown = 0f;
     public float fireRate = 3f;
 
@@ -44,7 +44,6 @@ public class SlowTurret : MonoBehaviour
                 var speedComponent = enemy.GetComponent<FollowWaypoint>();
                 if (!speedComponent.slowCheck)
                 {
-                    percentage = 0.5f;
                     speedComponent.slowCheck = true;
                     speedComponent.SlowingMob(duration, percentage);
                 }

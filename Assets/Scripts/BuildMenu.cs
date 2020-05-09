@@ -20,4 +20,11 @@ public class BuildMenu : MonoBehaviour {
         Object e = Resources.Load("UGMenu");
         Instantiate(e);
     }
+
+    public void UpgradeSlow(GameObject obj)
+    {
+        building = obj;
+        Object e = Resources.Load("UGSMenu");
+        Instantiate(e);
+    }
 }
