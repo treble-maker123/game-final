@@ -23,6 +23,7 @@ public class GameState : MonoBehaviour {
     public GameObject ground;
     public GameObject gameMenuPanel;
     public GameObject difficultyPanel;
+    public GameObject tipsPanel;
     public GameObject gameOverlay;
     public GameObject mobGroup;
     public GameObject player;
@@ -50,6 +51,11 @@ public class GameState : MonoBehaviour {
         set {
             gamePaused = value;
             gameMenuPanel.SetActive(gamePaused);
+            gameOverlay.SetActive(!gamePaused);
+            tipsPanel.SetActive(!gamePaused);
+
+            FollowWaypoint.GamePaused = gamePaused;
+            SpawnPoint.GamePaused = gamePaused;
 
             if (gamePaused) {
                 DisableFPS();
@@ -131,7 +137,6 @@ public class GameState : MonoBehaviour {
             GamePaused = !GamePaused;
         }
 
-        SpawnPoint.GamePaused = GamePaused;
 
         if (GamePaused) {
             // TODO: Stop updating
@@ -181,6 +186,7 @@ public class GameState : MonoBehaviour {
                 tipsText.text = NumMobsActive + " enemies left on the ground.";
 
                 if (NumMobsActive <= 0) {
+                    AdvanceLevel();
                     stage = Stage.Tally;
                     tallyCountDown = TallyTime;
                     StartCoroutine("TallyCountDown");
@@ -192,7 +198,6 @@ public class GameState : MonoBehaviour {
 
                 if (tallyCountDown <= 0) {
                     stage = Stage.Build;
-                    AdvanceLevel();
                 }
                 break;
             default:
@@ -220,16 +225,12 @@ public class GameState : MonoBehaviour {
 
     public void DisableFPS() {
         player.SetActive(false);
-        player.GetComponent<RigidbodyFirstPersonController>().enabled = false;
-        player.GetComponent<Rigidbody>().useGravity = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 
     public void EnableFPS() {
         player.SetActive(true);
-        player.GetComponent<RigidbodyFirstPersonController>().enabled = true;
-        player.GetComponent<Rigidbody>().useGravity = true;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }

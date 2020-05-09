@@ -14,7 +14,7 @@ public class FollowWaypoint : MonoBehaviour {
     public float speed = 5.0f;
     public GameObject sceneController;
 
-    // this method is invoked when
+    // this method is invoked when the mob reaches destination
     public delegate void OnEndReached();
     public event OnEndReached onEndReached;
 
@@ -24,11 +24,16 @@ public class FollowWaypoint : MonoBehaviour {
     public bool slowCheck = false;
     private int slowCountDown;
 
+    public static bool GamePaused = false;
+
     void Start () {
         currentPos = 0;
     }
 
     void Update () {
+        if (GamePaused)
+            return;
+
         if (currentPos < waypoints.Count) {
             GameObject currentWaypoint = waypoints[currentPos];
             Vector3 direction = currentWaypoint.transform.position - transform.position;

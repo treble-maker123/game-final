@@ -4321,8 +4321,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 1363377493}
   - {fileID: 2106479758}
+  - {fileID: 1363377493}
   - {fileID: 910605874}
   - {fileID: 1914157305}
   m_Father: {fileID: 0}
@@ -5750,7 +5750,7 @@ RectTransform:
   m_Children:
   - {fileID: 994316077}
   m_Father: {fileID: 625536687}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6301,6 +6301,7 @@ MonoBehaviour:
   ground: {fileID: 465395060}
   gameMenuPanel: {fileID: 2106479757}
   difficultyPanel: {fileID: 1914157304}
+  tipsPanel: {fileID: 910605873}
   gameOverlay: {fileID: 1363377492}
   mobGroup: {fileID: 346406723}
   player: {fileID: 2009410522}
@@ -6310,9 +6311,6 @@ MonoBehaviour:
   goldText: {fileID: 1526610473}
   levelText: {fileID: 2086313595}
   pauseKey: 27
-  numMobsToSpawn: 0
-  spawnInterval: 0
-  mobType: 1
 --- !u!1 &1576009327
 GameObject:
   m_ObjectHideFlags: 0
@@ -10774,7 +10772,7 @@ RectTransform:
   - {fileID: 1981210339}
   - {fileID: 847445069}
   m_Father: {fileID: 625536687}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
