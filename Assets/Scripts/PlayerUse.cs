@@ -7,6 +7,13 @@ public class PlayerUse : MonoBehaviour {
     public float range = 10f;
 
     public Camera fpsCamera;
+    public Transform[] weapons;
+    private int startWeapon = 0;
+
+    void Start()
+    {
+        WeaponSwap(startWeapon);
+    }
 
     // Update is called once per frame
     void Update()
@@ -14,6 +21,18 @@ public class PlayerUse : MonoBehaviour {
         if (Input.GetKeyDown("e"))
         {
             Interact();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            WeaponSwap(0);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            WeaponSwap(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            WeaponSwap(2);
         }
     }
 
@@ -43,6 +62,23 @@ public class PlayerUse : MonoBehaviour {
                 BuildMenu tile = hitInfo.transform.GetComponent<BuildMenu>();
                 GameObject hitObj = hitInfo.transform.gameObject;
                 tile.UpgradeSlow(hitObj);
+            }
+        }
+    }
+
+    void WeaponSwap(int activeWep)
+    {
+        Debug.Log("Switch to: ");
+        Debug.Log(activeWep);
+        for (int i = 0; i < weapons.Length; i++)
+        {
+            if (activeWep == i)
+            {
+                weapons[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                weapons[i].gameObject.SetActive(false);
             }
         }
     }
