@@ -20,6 +20,7 @@ public class GameState : MonoBehaviour {
     private bool building;
     private bool spawning;
 
+    public Camera arialView;
     public GameObject ground;
     public GameObject gameMenuPanel;
     public GameObject difficultyPanel;
@@ -150,6 +151,7 @@ public class GameState : MonoBehaviour {
                 gameOverlay.SetActive(false);
                 tipsPanel.SetActive(false);
                 difficultyPanel.SetActive(true);
+                arialView.enabled = false;
                 break;
             case Stage.Build:
                 tipsHeader.text = "Fortify Your Defenses";
@@ -255,12 +257,14 @@ public class GameState : MonoBehaviour {
 
     public void DisableFPS() {
         player.SetActive(false);
+        arialView.enabled = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 
     public void EnableFPS() {
         player.SetActive(true);
+        arialView.enabled = true;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
