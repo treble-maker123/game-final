@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEditor;
 
 public class PlayerUse : MonoBehaviour {
 
@@ -10,8 +12,13 @@ public class PlayerUse : MonoBehaviour {
     public Transform[] weapons;
     private int startWeapon = 0;
 
+    public RawImage rifle;
+    public RawImage pistol;
+    public RawImage heavy;
+
     void Start()
     {
+        FetchIcons();
         WeaponSwap(startWeapon);
     }
 
@@ -81,5 +88,15 @@ public class PlayerUse : MonoBehaviour {
                 weapons[i].gameObject.SetActive(false);
             }
         }
+    }
+
+    void FetchIcons() {
+        Texture2D rifleIcon = AssetPreview.GetAssetPreview(Resources.Load("Guns/Rifle"));
+        Texture2D pistolIcon = AssetPreview.GetAssetPreview(Resources.Load("Guns/Pistol"));
+        Texture2D heavyIcon = AssetPreview.GetAssetPreview(Resources.Load("Guns/Heavy"));
+
+        rifle.texture = rifleIcon;
+        pistol.texture = pistolIcon;
+        heavy.texture = heavyIcon;
     }
 }
