@@ -81,7 +81,7 @@ public class PlayerUse : MonoBehaviour {
         }
     }
 
-    void WeaponSwap(int activeWep)
+    public void WeaponSwap(int activeWep)
     {
         for (int i = 0; i < weapons.Length; i++)
         {

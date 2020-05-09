@@ -152,6 +152,7 @@ public class GameState : MonoBehaviour {
                 tipsPanel.SetActive(false);
                 difficultyPanel.SetActive(true);
                 arialView.enabled = false;
+                player.GetComponent<PlayerUse>().WeaponSwap(0);
                 break;
             case Stage.Build:
                 tipsHeader.text = "Fortify Your Defenses";
