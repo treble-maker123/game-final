@@ -251,14 +251,17 @@ public class GameState : MonoBehaviour {
                 tipsText.text = "Get ready for the next wave! " + tallyCountDown + " seconds left.";
 
                 if (tallyCountDown <= 0) {
-                    stage = Stage.Build;
+
+                    if (level % 10 == 0)
+                        stage = Stage.Build;
+                    else
+                        stage = Stage.Spawn;
                 }
                 break;
             case Stage.GameOver:
                 tipsHeader.text = "Game Over!";
                 tipsText.text = "";
 
-                // TODO: Calculate score
                 Score = CalculateScore(difficulty, MobsKilled, Level);
 
                 gameMenuPanel.SetActive(false);
