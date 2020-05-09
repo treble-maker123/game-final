@@ -56,8 +56,11 @@ public class SpawnPoint : MonoBehaviour {
      */
     public void SpawnMob(MobType type) {
         GameObject mob;
-        GameObject healthbar;
         AnimationClip walkClip;
+
+        // programmatically add a healthbar
+        GameObject healthbar = Instantiate(Resources.Load("Healthbar")) as GameObject;
+        healthbar.name = "Healthbar";
 
         switch(type) {
             case MobType.skeleton:
@@ -71,18 +74,13 @@ public class SpawnPoint : MonoBehaviour {
                 mob.GetComponent<BoxCollider>().center = new Vector3(0f, 1.1f, 0f);
                 mob.GetComponent<BoxCollider>().size = new Vector3(0.7f, 2.1f, 0.7f);
 
-                // programmatically add a healthbar
-                healthbar = Instantiate(Resources.Load("Healthbar")) as GameObject;
-                healthbar.name = "Healthbar";
+                // fine-tune healthbar
                 healthbar.transform.parent = mob.transform;
                 healthbar.transform.localPosition = new Vector3(0f, 3f, 0f);
 
                 // setup animation
                 mob.AddComponent<Animation>();
                 walkClip = Resources.Load<AnimationClip>("Skeletons_demo/animation/DS_onehand_walk");
-
-                mob.AddComponent<MobInteraction>();
-                mob.GetComponent<MobInteraction>().maxHealth = 100f;
                 break;
             case MobType.stone:
                 mob = Instantiate(Resources.Load("StoneMonster/StoneMonster")) as GameObject;
@@ -91,23 +89,36 @@ public class SpawnPoint : MonoBehaviour {
                 mob.transform.position = new Vector3(5f, 1.5f, 5f);
 
                 mob.AddComponent<Rigidbody>();
+
                 mob.AddComponent<BoxCollider>();
-                // raise the collider so the skeleton is not levitated
                 mob.GetComponent<BoxCollider>().center = new Vector3(0f, 0.5f, 0f);
                 mob.GetComponent<BoxCollider>().size = new Vector3(0.8f, 1.2f, 0.8f);
 
-                // programmatically add a healthbar
-                healthbar = Instantiate(Resources.Load("Healthbar")) as GameObject;
-                healthbar.name = "healthbar";
+                // fine-tune healthbar
                 healthbar.transform.parent = mob.transform;
                 healthbar.transform.localPosition = new Vector3(0f, 1.8f, 0f);
 
                 // setup animation
                 mob.AddComponent<Animation>();
                 walkClip = Resources.Load<AnimationClip>("StoneMonster/Animations/StoneMonster_Run");
+                break;
+            case MobType.orc:
+                mob = Instantiate(Resources.Load("Orc/model/Orc_Wolfrider")) as GameObject;
 
-                mob.AddComponent<MobInteraction>();
-                mob.GetComponent<MobInteraction>().maxHealth = 100f;
+                mob.name = "Ground";
+                mob.transform.position = new Vector3(5f, 1.5f, 5f);
+
+                mob.AddComponent<Rigidbody>();
+
+                mob.AddComponent<BoxCollider>();
+                mob.GetComponent<BoxCollider>().center = new Vector3(0f, 0.9f, 0f);
+                mob.GetComponent<BoxCollider>().size = new Vector3(0.8f, 1.7f, 0.6f);
+
+                healthbar.transform.parent = mob.transform;
+                healthbar.transform.localPosition = new Vector3(0f, 2.4f, 0f);
+
+                mob.AddComponent<Animation>();
+                walkClip = Resources.Load<AnimationClip>("Orc/animation/Orc_wolfrider_03_run");
                 break;
             default:
                 return;
@@ -146,6 +157,10 @@ public class SpawnPoint : MonoBehaviour {
         Healthbar hb = mob.GetComponentInChildren<Healthbar>();
         hb.player = player;
 
+        // Setting up mob interaction
+        mob.AddComponent<MobInteraction>();
+        mob.GetComponent<MobInteraction>().maxHealth = 100f;
+
         mob.SetActive(true);
     }
 
@@ -158,6 +173,7 @@ public class SpawnPoint : MonoBehaviour {
 
     public enum MobType {
         skeleton,
-        stone
+        stone,
+        orc
     }
 }

@@ -122,7 +122,7 @@ public class GameState : MonoBehaviour {
         Gold = StartingGold;
 
         numMobsToSpawn = 1;
-        mobType = SpawnPoint.MobType.stone;
+        mobType = SpawnPoint.MobType.orc;
         spawnInterval = 2.0f;
     }
 
