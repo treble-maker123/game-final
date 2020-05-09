@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Tutorial : MonoBehaviour {
 
@@ -25,6 +26,14 @@ public class Tutorial : MonoBehaviour {
     public GameObject buildUI;
     public GameObject upgradeUI;
     public GameObject mobUI;
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        }
+    }
 
 	public void Weapon()
     {
@@ -94,7 +103,6 @@ public class Tutorial : MonoBehaviour {
 
     public void Menu()
     {
-        //Get Main Menu Scene
-        Debug.Log("Back to menu");
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 }
