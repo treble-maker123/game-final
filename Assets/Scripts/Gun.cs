@@ -23,7 +23,7 @@ public class Gun : MonoBehaviour {
 
         RaycastHit hitInfo;
 
-        Vector3 adj = new Vector3(Random.RandomRange(-0.5f, 0.5f), Random.RandomRange(-0.5f, 0.5f));
+        Vector3 adj = new Vector3(Random.RandomRange(-0.8f, 0.8f), Random.RandomRange(-0.8f, 0.8f));
         if(Physics.Raycast(fpsCamera.transform.position + adj, fpsCamera.transform.forward, out hitInfo, range))
         {
             var e = Resources.Load("HitSpot");
