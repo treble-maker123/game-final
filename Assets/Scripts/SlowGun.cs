@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Gun : MonoBehaviour
+public class SlowGun : MonoBehaviour
 {
 
     public float damage = 10f;
@@ -28,8 +28,7 @@ public class Gun : MonoBehaviour
 
         RaycastHit hitInfo;
 
-        Vector3 adj = new Vector3(Random.RandomRange(-0.8f, 0.8f), Random.RandomRange(-0.8f, 0.8f));
-        if (Physics.Raycast(fpsCamera.transform.position + adj, fpsCamera.transform.forward, out hitInfo, range))
+        if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hitInfo, range))
         {
             //var e = Resources.Load("HitSpot");
             //Instantiate(e, hitInfo.point, Quaternion.identity);
@@ -37,8 +36,12 @@ public class Gun : MonoBehaviour
             //This is where we'll check if it's a hittable game object that can take damage.
             if (hitInfo.transform.tag == "Mobs")
             {
-                MobInteraction mob = hitInfo.transform.GetComponent<MobInteraction>();
-                mob.TakeDamage(10f);
+                var speedComponent = hitInfo.transform.GetComponent<FollowWaypoint>();
+                if (!speedComponent.slowCheck)
+                {
+                    speedComponent.slowCheck = true;
+                    speedComponent.SlowingMob(5, 0.6f);
+                }
             }
         }
     }

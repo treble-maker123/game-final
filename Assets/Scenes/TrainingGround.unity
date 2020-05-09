@@ -184,56 +184,56 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1794022881}
   m_Script: {fileID: -98529514, guid: f70555f144d8491a825f0804e09c671c, type: 3}
---- !u!1001 &713539392
+--- !u!1001 &1028896606
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4357999211525494, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
+    - target: {fileID: 4955526225478384, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4357999211525494, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
+    - target: {fileID: 4955526225478384, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4357999211525494, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
+    - target: {fileID: 4955526225478384, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4357999211525494, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
+    - target: {fileID: 4955526225478384, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4357999211525494, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
+    - target: {fileID: 4955526225478384, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
       propertyPath: m_LocalRotation.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4357999211525494, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
+    - target: {fileID: 4955526225478384, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4357999211525494, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
+    - target: {fileID: 4955526225478384, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
       propertyPath: m_LocalRotation.w
       value: -0.00000016292068
       objectReference: {fileID: 0}
-    - target: {fileID: 4357999211525494, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
+    - target: {fileID: 4955526225478384, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114332617834504670, guid: 75a3187c48ddd5a48b80146d2b7618fc,
+    - target: {fileID: 114983685326138354, guid: 75a3187c48ddd5a48b80146d2b7618fc,
         type: 2}
       propertyPath: rifle
       value: 
       objectReference: {fileID: 1997809931}
-    - target: {fileID: 114332617834504670, guid: 75a3187c48ddd5a48b80146d2b7618fc,
+    - target: {fileID: 114983685326138354, guid: 75a3187c48ddd5a48b80146d2b7618fc,
         type: 2}
       propertyPath: pistol
       value: 
       objectReference: {fileID: 1713542241}
-    - target: {fileID: 114332617834504670, guid: 75a3187c48ddd5a48b80146d2b7618fc,
+    - target: {fileID: 114983685326138354, guid: 75a3187c48ddd5a48b80146d2b7618fc,
         type: 2}
       propertyPath: heavy
       value: 

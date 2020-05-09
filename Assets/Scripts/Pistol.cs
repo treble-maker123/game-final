@@ -27,13 +27,13 @@ public class Pistol : MonoBehaviour
 
         if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hitInfo, range))
         {
-            var e = Resources.Load("HitSpot");
-            Instantiate(e, hitInfo.point, Quaternion.identity);
+            //var e = Resources.Load("HitSpot");
+            //Instantiate(e, hitInfo.point, Quaternion.identity);
             //This is where we'll check if it's a hittable game object that can take damage.
-            if (hitInfo.transform.tag == "Mobs")
+            if (hitInfo.transform.name == "Air")
             {
                 MobInteraction mob = hitInfo.transform.GetComponent<MobInteraction>();
-                mob.TakeDamage(10f);
+                mob.TakeDamage(30f);
             }
         }
     }
