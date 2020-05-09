@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class Gun : MonoBehaviour {
 
@@ -21,8 +22,12 @@ public class Gun : MonoBehaviour {
         muzzleFlash.Play();
 
         RaycastHit hitInfo;
-        if(Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hitInfo, range))
+
+        Vector3 adj = new Vector3(Random.RandomRange(-0.5f, 0.5f), Random.RandomRange(-0.5f, 0.5f));
+        if(Physics.Raycast(fpsCamera.transform.position + adj, fpsCamera.transform.forward, out hitInfo, range))
         {
+            var e = Resources.Load("HitSpot");
+            Instantiate(e, hitInfo.point, Quaternion.identity);
             Debug.Log(hitInfo.transform.name);
             //This is where we'll check if it's a hittable game object that can take damage.
             if(hitInfo.transform.tag == "Mobs")
