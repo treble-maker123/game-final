@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 114593839251768372}
   m_Layer: 5
   m_Name: UGSMenu
-  m_TagString: Untagged
+  m_TagString: Upgrade
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
