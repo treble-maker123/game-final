@@ -45,9 +45,13 @@ public class SpawnPoint : MonoBehaviour {
      */
     public IEnumerator StartSpawn(int numToSpawn, MobType type, float interval) {
         while (!SpawnPoint.GamePaused && numSpawned < numToSpawn) {
-            SpawnMob(type);
-            numSpawned++;
-            yield return new WaitForSeconds(interval);
+            if (GamePaused) {
+                yield return new WaitForSeconds(0.1f);
+            } else {
+                SpawnMob(type);
+                numSpawned++;
+                yield return new WaitForSeconds(interval);
+            }
         }
     }
 

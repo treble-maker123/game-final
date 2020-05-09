@@ -41,7 +41,7 @@ public class GameState : MonoBehaviour {
     // variables for tuning the game
     public static readonly int TotalLives = 40;
     public static readonly int StartingGold = 200;
-    public static readonly int BuildTime = 2;
+    public static readonly int BuildTime = 10;
     public static readonly int TallyTime = 2;
     public static readonly int MobsPerWave = 1;
     public static readonly float MobSpawnInterval = 2.0f;
@@ -210,16 +210,24 @@ public class GameState : MonoBehaviour {
      * Countdown coroutine for the building phase.
      */
     IEnumerator BuildCountDown() {
-        while (!GamePaused && buildCountDown > 0) {
-            buildCountDown -= 1;
-            yield return new WaitForSeconds(1.0f);
+        while (buildCountDown > 0) {
+            if (GamePaused) {
+                yield return new WaitForSeconds(0.1f);
+            } else {
+                buildCountDown -= 1;
+                yield return new WaitForSeconds(1.0f);
+            }
         }
     }
 
     IEnumerator TallyCountDown() {
-        while (!GamePaused && tallyCountDown > 0) {
-            tallyCountDown -= 1;
-            yield return new WaitForSeconds(1.0f);
+        while (tallyCountDown > 0) {
+            if (GamePaused) {
+                yield return new WaitForSeconds(0.1f);
+            } else {
+                tallyCountDown -= 1;
+                yield return new WaitForSeconds(1.0f);
+            }
         }
     }
 
