@@ -41,11 +41,16 @@ public class MainMenuState : MonoBehaviour {
     // key to go back to the menu state
     public KeyCode backKey;
 
+    public Camera mainCamera;
+    public AudioClip backgroundClip;
+
     void Start () {
         currentState = MenuState.menu;
         allPanels = new List<GameObject> {
             buttonPanel, instructionPanel, scoreboardPanel, creditsPanel
         };
+        AudioSource source = mainCamera.GetComponent<AudioSource>();
+        source.PlayOneShot(backgroundClip);
     }
 
     void Update () {
