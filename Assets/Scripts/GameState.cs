@@ -146,6 +146,10 @@ public class GameState : MonoBehaviour {
 
         switch(stage) {
             case Stage.Selection:
+                gameMenuPanel.SetActive(false);
+                gameOverlay.SetActive(false);
+                tipsPanel.SetActive(false);
+                difficultyPanel.SetActive(true);
                 break;
             case Stage.Build:
                 tipsHeader.text = "Fortify Your Defenses";
@@ -302,7 +306,11 @@ public class GameState : MonoBehaviour {
         spawn = ground.GetComponentInChildren<SpawnPoint>();
         stage = Stage.Build;
         buildCountDown = BuildTime;
+
         difficultyPanel.SetActive(false);
+        tipsPanel.SetActive(true);
+        gameOverlay.SetActive(true);
+        gameMenuPanel.SetActive(false);
 
         player.transform.position = new Vector3(10f, 0f, 10f);
         EnableFPS();
