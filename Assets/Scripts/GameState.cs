@@ -56,6 +56,7 @@ public class GameState : MonoBehaviour {
 
             FollowWaypoint.GamePaused = gamePaused;
             SpawnPoint.GamePaused = gamePaused;
+            Turret.GamePaused = gamePaused;
 
             if (gamePaused) {
                 DisableFPS();

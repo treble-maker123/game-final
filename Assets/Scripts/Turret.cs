@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour {
 
+    public static bool GamePaused = false;
+
     private Transform target;
     private GameObject targetEnemy;
 
@@ -67,6 +69,7 @@ public class Turret : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (GamePaused) return;
         if (target == null) return;
 
         Vector3 direction = target.position - transform.position;

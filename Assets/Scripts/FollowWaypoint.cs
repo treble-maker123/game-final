@@ -81,8 +81,15 @@ public class FollowWaypoint : MonoBehaviour {
     {
         while (slowCountDown > 0)
         {
-            slowCountDown -= 1;
-            yield return new WaitForSeconds(1.0f);
+            if (GamePaused)
+            {
+                yield return new WaitForSeconds(0.2f);
+            }
+            else
+            {
+                slowCountDown -= 1;
+                yield return new WaitForSeconds(1.0f);
+            }
         }
         slowCheck = false;
         speed = FullSpeed;
