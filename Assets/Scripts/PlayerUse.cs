@@ -15,10 +15,15 @@ public class PlayerUse : MonoBehaviour {
     public RawImage rifle;
     public RawImage pistol;
     public RawImage heavy;
+    public RawImage[] weaponIcons;
 
     void Start()
     {
         FetchIcons();
+        weaponIcons = new RawImage[3] {
+            rifle, pistol, heavy
+        };
+
         WeaponSwap(startWeapon);
     }
 
@@ -31,14 +36,17 @@ public class PlayerUse : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            // rifle
             WeaponSwap(0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+            // pistol
             WeaponSwap(1);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
+            // heavy
             WeaponSwap(2);
         }
     }
@@ -75,17 +83,17 @@ public class PlayerUse : MonoBehaviour {
 
     void WeaponSwap(int activeWep)
     {
-        Debug.Log("Switch to: ");
-        Debug.Log(activeWep);
         for (int i = 0; i < weapons.Length; i++)
         {
             if (activeWep == i)
             {
                 weapons[i].gameObject.SetActive(true);
+                weaponIcons[i].CrossFadeAlpha(1.0f, 0.2f, false);
             }
             else
             {
                 weapons[i].gameObject.SetActive(false);
+                weaponIcons[i].CrossFadeAlpha(0.2f, 0.2f, false);
             }
         }
     }
