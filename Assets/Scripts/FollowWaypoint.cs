@@ -80,17 +80,17 @@ public class FollowWaypoint : MonoBehaviour {
             yield return new WaitForSeconds(1.0f);
         }
         slowCheck = false;
+        speed = FullSpeed;
+        slowCountDown = OriginalDuration;
     }
 
     public void SlowingMob(int duration, float percent)
     {
-        Debug.Log("Slowed");
+        //Debug.Log("Slowed");
         float newSpeed = FullSpeed * percent;
         speed = newSpeed;
         slowCountDown = duration;
         IEnumerator slow = SlowCountDown();
         StartCoroutine(slow);
-        speed = FullSpeed;
-        slowCountDown = OriginalDuration;
     }
 }
