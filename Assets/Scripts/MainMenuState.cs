@@ -89,6 +89,7 @@ public class MainMenuState : MonoBehaviour {
                  if (PlayerPrefs.GetString("showSB") == "true") {
                     int score = PlayerPrefs.GetInt("score");
                     string name= PlayerPrefs.GetString("name");
+                    SetupScoreFile();
                     UpdateScoreBoard(score, name);
                     PlayerPrefs.SetString("showSB", "false");
                 }
@@ -126,8 +127,10 @@ public class MainMenuState : MonoBehaviour {
     }
 
     private void UpdateScoreBoard(int newScore, string newName) {
-        int tempScore = 0;
-        string tempName = "";
+
+        Debug.Log("Updating score for " + newName + " with " + newScore);
+        int tempScore;
+        string tempName;
 
         // sort the scoreboard
         for (int i = numPlayers - 1; i >= 0; i--) {
@@ -136,10 +139,12 @@ public class MainMenuState : MonoBehaviour {
                     scores[i] = newScore;
                     names[i] = newName;
                 } else {
+                    // make room for the new score
                     tempScore = scores[i];
                     tempName = names[i];
-                    scores[i] = scores[i+1];
-                    names[i] = names[i+1];
+                    scores[i] = newScore;
+                    names[i] = newName;
+                    // move the old ith score down a place
                     scores[i+1] = tempScore;
                     names[i+1] = tempName;
                 }
@@ -151,6 +156,7 @@ public class MainMenuState : MonoBehaviour {
         // save the update
         using (StreamWriter sw = File.CreateText(fileName)) {
             for (int i = 0; i < numPlayers; i++) {
+                Debug.Log("Writing (" + names[i] + ", " + scores[i] + ")");
                 sw.WriteLine(names[i] + "," + scores[i]);
             }
         }

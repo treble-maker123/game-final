@@ -27,6 +27,7 @@ public class Ground : MonoBehaviour {
     public float arialCameraHeight;
     public GameObject sceneController;
     public GameObject player;
+    public AudioSource houseAudioSource;
 
     public Camera arialViewCamera;
 
@@ -160,6 +161,9 @@ public class Ground : MonoBehaviour {
                         house.transform.localPosition = new Vector3(0f, 0.5f, 0f);
                         house.transform.Rotate(new Vector3(-90f, 0f, 0f));
 
+                        house.AddComponent<AudioSource>();
+                        houseAudioSource = house.GetComponent<AudioSource>();
+
                         house.SetActive(true);
 
                         tile.GetComponent<Renderer>().material.mainTexture =
@@ -221,7 +225,6 @@ public class Ground : MonoBehaviour {
                     GameObject neighbor = tiles[n.X, n.Y];
                     if (neighbor.tag.Contains("Terrain")) {
                         neighbor.GetComponent<Tile>().IsBuildable = true;
-
                     }
                 }
             }

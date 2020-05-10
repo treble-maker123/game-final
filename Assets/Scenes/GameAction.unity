@@ -1289,6 +1289,7 @@ MonoBehaviour:
   arialCameraHeight: 70
   sceneController: {fileID: 1556268067}
   player: {fileID: 286069574}
+  houseAudioSource: {fileID: 0}
   arialViewCamera: {fileID: 2108116107}
 --- !u!1 &625536683
 GameObject:
@@ -3232,6 +3233,7 @@ MonoBehaviour:
   playerName: {fileID: 1489757416}
   scoreBoardSubmit: {fileID: 438873043}
   upbeatClip: {fileID: 8300000, guid: e049ef21c4f4f4c2ab391d18ba7b7f98, type: 3}
+  screamClip: {fileID: 0}
 --- !u!1 &1575665928
 GameObject:
   m_ObjectHideFlags: 0
