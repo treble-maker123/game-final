@@ -44,7 +44,9 @@ public class SpawnPoint : MonoBehaviour {
      * For coroutines to start spawning mobs.
      */
     public IEnumerator StartSpawn(int numToSpawn, MobType type, float interval, float health) {
-        while (!SpawnPoint.GamePaused && numSpawned < numToSpawn) {
+        Debug.Log("Called StartSpawn with numToSpawn " +  numToSpawn + ", mobType " +  type.ToString());
+        while (numSpawned < numToSpawn) {
+            Debug.Log("numSpawned: " + numSpawned + ",numToSpawn: " + numToSpawn);
             if (GamePaused) {
                 yield return new WaitForSeconds(0.1f);
             } else {

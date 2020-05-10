@@ -43,7 +43,7 @@ public class Gun : MonoBehaviour
         {
             //var e = Resources.Load("HitSpot");
             //Instantiate(e, hitInfo.point, Quaternion.identity);
-            Debug.Log(hitInfo.transform.name);
+            // Debug.Log(hitInfo.transform.name);
             //This is where we'll check if it's a hittable game object that can take damage.
             if (hitInfo.transform.tag == "Mobs")
             {

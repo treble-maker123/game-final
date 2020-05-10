@@ -19,6 +19,7 @@ public class GameState : MonoBehaviour {
 
     private bool building;
     private bool spawning;
+    private int numMobsThisWave;
 
     public Camera arialView;
     public GameObject ground;
@@ -47,8 +48,8 @@ public class GameState : MonoBehaviour {
     // variables for tuning the game
     public static readonly int TotalLives = 40;
     public static readonly int StartingGold = 200;
-    public static readonly int BuildTime = 10;
-    public static readonly int TallyTime = 2;
+    public static readonly int BuildTime = 4;
+    public static readonly int TallyTime = 4;
     public static readonly int MobsPerWave = 1;
     public static readonly float MobSpawnInterval = 2.0f;
     public static readonly float MobStartingHealth = 100f;
@@ -150,6 +151,7 @@ public class GameState : MonoBehaviour {
         Lives = TotalLives;
         Gold = StartingGold;
 
+        numMobsThisWave = MobsPerWave;
         mobsKilled = 0;
     }
 
@@ -203,9 +205,11 @@ public class GameState : MonoBehaviour {
                 break;
             case Stage.Spawn:
                 tipsHeader.text = "Enemies Spawning!";
-                tipsText.text = (MobsPerWave - spawn.NumSpawned) + " enemies left to spawn.";
+                tipsText.text = (numMobsThisWave - spawn.NumSpawned) + " enemies left to spawn.";
 
                 if (!spawning) {
+                    Debug.Log("Starting spawning stage.");
+
                     SpawnPoint.MobType type =
                         (SpawnPoint.MobType)
                             UnityEngine.Random.Range(0, (int) SpawnPoint.MobType.count);
@@ -224,13 +228,15 @@ public class GameState : MonoBehaviour {
                     }
 
                     float totalMobs = MobsPerWave * (float)Math.Pow(mobMultiplier, Level);
-                    int mobCount = (int) totalMobs;
-                    IEnumerator spawnCoroutine = spawn.StartSpawn(mobCount, type, MobSpawnInterval, MobStartingHealth);
+                    numMobsThisWave = (int) totalMobs;
+                    Debug.Log("Generating " + numMobsThisWave + " for this ave.");
+                    IEnumerator spawnCoroutine = spawn.StartSpawn(numMobsThisWave, type, MobSpawnInterval, MobStartingHealth);
                     StartCoroutine(spawnCoroutine);
                     spawning = true;
                 }
 
-                if (spawning && spawn.NumSpawned >= MobsPerWave) {
+                if (spawning && spawn.NumSpawned >= numMobsThisWave) {
+                    Debug.Log("Spawned " + spawn.NumSpawned + "/" + numMobsThisWave + ", entering battle stage.");
                     spawning = false;
                     stage = Stage.Battle;
                 }
@@ -240,6 +246,7 @@ public class GameState : MonoBehaviour {
                 tipsText.text = NumMobsActive + " enemies left on the ground.";
 
                 if (NumMobsActive <= 0) {
+                    Debug.Log("No more mobs active, entering tally stage.");
                     AdvanceLevel();
                     stage = Stage.Tally;
                     tallyCountDown = TallyTime;
@@ -251,11 +258,16 @@ public class GameState : MonoBehaviour {
                 tipsText.text = "Get ready for the next wave! " + tallyCountDown + " seconds left.";
 
                 if (tallyCountDown <= 0) {
-
-                    if (level % 10 == 0)
+                    // only give time to build every 10 levels
+                    if (level % 10 == 0) {
+                        Debug.Log("Tally stage over, entering build stage.");
                         stage = Stage.Build;
-                    else
+                    }
+                    else {
+                        Debug.Log("Tally stage over, entering spawn stage.");
+                        spawn.ResetCounter();
                         stage = Stage.Spawn;
+                    }
                 }
                 break;
             case Stage.GameOver:

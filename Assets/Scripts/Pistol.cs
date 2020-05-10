@@ -32,6 +32,7 @@ public class Pistol : MonoBehaviour
         muzzleFlash.Play();
         source.PlayOneShot(shotClip);
 
+
         RaycastHit hitInfo;
 
         if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hitInfo, range))
