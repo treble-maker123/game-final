@@ -238,6 +238,14 @@ Prefab:
       propertyPath: heavy
       value: 
       objectReference: {fileID: 541118122}
+    - target: {fileID: 4374624865937230, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 4374624865937230, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.06
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 75a3187c48ddd5a48b80146d2b7618fc, type: 2}
   m_IsPrefabParent: 0
