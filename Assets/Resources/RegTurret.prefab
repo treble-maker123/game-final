@@ -465,7 +465,7 @@ MonoBehaviour:
   fireRate: 1
   dmgCost: 300
   rngCost: 300
-  frCost: 300
+  frCost: 1000
   enemyTag: Mobs
   enemyType: Ground
   partToRotate: {fileID: 4020631783969774}
