@@ -51,7 +51,7 @@ public class GameState : MonoBehaviour {
     public static readonly int BuildTime = 30;
     public static readonly int TallyTime = 5;
     public static readonly int MobsPerWave = 1;
-    public static readonly float MobSpawnInterval = 2.0f;
+    public static readonly float MobSpawnInterval = 1.0f;
     public static readonly float MobStartingHealth = 100f;
     public static readonly float mobMultiplier = 2.0f;
 
