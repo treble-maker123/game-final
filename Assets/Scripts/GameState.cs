@@ -59,6 +59,10 @@ public class GameState : MonoBehaviour {
     private int score;
     private int mobsKilled;
 
+    private AudioSource fpsAudioSource;
+
+    public AudioClip upbeatClip;
+
     public bool GamePaused {
         get { return gamePaused; }
         set {
@@ -156,6 +160,7 @@ public class GameState : MonoBehaviour {
     }
 
     void Start () {
+        fpsAudioSource = player.GetComponent<AudioSource>();
         InitializeVariables();
         DisableFPS();
 
@@ -352,6 +357,7 @@ public class GameState : MonoBehaviour {
      */
     public void AdvanceLevel() {
         Level += 1;
+        fpsAudioSource.PlayOneShot(upbeatClip);
     }
 
     /**
