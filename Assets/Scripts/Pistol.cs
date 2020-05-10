@@ -43,7 +43,8 @@ public class Pistol : MonoBehaviour
             if (hitInfo.transform.name == "Air")
             {
                 MobInteraction mob = hitInfo.transform.GetComponent<MobInteraction>();
-                mob.TakeDamage(30f);
+                float smallDmg = mob.maxHealth * 0.15f;
+                mob.TakeDamage(smallDmg);
             }
         }
     }

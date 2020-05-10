@@ -48,7 +48,8 @@ public class Gun : MonoBehaviour
             if (hitInfo.transform.tag == "Mobs")
             {
                 MobInteraction mob = hitInfo.transform.GetComponent<MobInteraction>();
-                mob.TakeDamage(10f);
+                float smallDmg = mob.maxHealth * 0.05f;
+                mob.TakeDamage(smallDmg);
             }
         }
     }
