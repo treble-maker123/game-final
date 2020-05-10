@@ -128,7 +128,7 @@ public class MainMenuState : MonoBehaviour {
 
     private void UpdateScoreBoard(int newScore, string newName) {
 
-        Debug.Log("Updating score for " + newName + " with " + newScore);
+        //Debug.Log("Updating score for " + newName + " with " + newScore);
         int tempScore;
         string tempName;
 
