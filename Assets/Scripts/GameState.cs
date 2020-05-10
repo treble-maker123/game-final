@@ -48,12 +48,12 @@ public class GameState : MonoBehaviour {
     // variables for tuning the game
     public static readonly int TotalLives = 40;
     public static readonly int StartingGold = 200;
-    public static readonly int BuildTime = 4;
-    public static readonly int TallyTime = 4;
+    public static readonly int BuildTime = 30;
+    public static readonly int TallyTime = 5;
     public static readonly int MobsPerWave = 1;
     public static readonly float MobSpawnInterval = 2.0f;
     public static readonly float MobStartingHealth = 100f;
-    public static readonly float mobMultiplier = 1.2f;
+    public static readonly float mobMultiplier = 2.0f;
 
     // game stats;
     private int score;
